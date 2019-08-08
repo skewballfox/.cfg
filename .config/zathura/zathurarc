@@ -1,0 +1,17 @@
+#//main
+set selection-clipboard clipboard
+
+set font "Droid Sans Mono 8"
+
+set adjust-open best-fit
+
+#//colors
+set default-bg "#2c3529"
+set default-fg "#39ff14"
+
+set statusbar-bg "#2c3529"
+set statusbar-fg "#39ff14"
+
+set inputbar-bg "#2c3529"
+set inputbar-fg "#39ff14"
+
