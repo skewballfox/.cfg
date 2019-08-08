@@ -1,0 +1,15 @@
+{
+    "markdown-pdf.convertOnSave": false,
+    "markdown-pdf.executablePath": "/usr/bin/chromium",
+    "markdownTableFormatter.enable":true,
+    "terminal.integrated.rendererType": "dom",
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "terminal.integrated.fontFamily": "Fira Code",
+    "terminal.external.linuxExec": "termite",
+    "explorer.confirmDelete": false,
+    "git.enableSmartCommit": true,
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+}
