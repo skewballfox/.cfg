@@ -25,15 +25,17 @@ exec --no-startup-id dunst &
 exec --no-startup-id thunar --daemon &
 exec --no-startup-id blueman-applet &
 exec --no-startup-id udiskie --no-automount --tray --use-udisks2 &
+exec --no-startup-id aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
 # exec --no-startup-id conky -c ~/path/to/.conkyrc
 
 #USER DEFINED KEYS
 bindsym $mod+j exec --no-startup-id firefox
 bindsym $mod+k exec code 
 bindsym $mod+Shift+l exec i3lock-fancy
-#bindsym $mod+i exec "firefox -new-instance -P 'Social_Networking
-bindsym Print exec "scrot -e 'mv $f ~/Screenshots'"
-bindsym $mod+Print exec "scrot -ue 'mv $f ~/Screenshots'"
+
+
+bindsym Print exec "scrot -e 'mv $f ~/Media/Photos/Screenshots/'"
+bindsym $mod+Print exec "scrot -ue 'mv $f ~/Media/Photos/Screenshots'"
 
 # Media volume controls
 bindsym XF86AudioMute exec amixer sset 'Master' toggle
