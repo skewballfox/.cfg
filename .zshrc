@@ -107,7 +107,80 @@ fi
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
+# completion for powerpill
 
+compdef _pacman powerpill=pacman
 
-# aliases within the ZSH_CUSTOM folder.
+##################### 9k tweaks ################################################
+################################################################################
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context history time dir vcs newline os_icon)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+################################# Aliases #####################################
+###############################################################################
+
+#the below is to allow aliases to be passed to sudo
+alias sudo='sudo '
+#the below is to backup my dotfiles to github
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+#the below alias is to modify default ls behavior
+alias ls='ls -1lih --color=auto'
+#color output with grep
+alias grep='grep --color=auto'
+#reload zsh
+alias zr='source $HOME/.zshrc'
+#reading list
+alias rtask="task rc.data.location=~/gdrive/.reading_list"
+
+############################### Environment Variables ########################
+##############################################################################
+
+#using rust
+export PATH=$PATH:~/.cargo/bin
+
+#the location of the self_log directory
+export SLog_directory="$HOME/Gdrive/self_log"
+
+#the location of system tools
+export Sys_Tools_Directory="$HOME/Workspace/System_Tools"
+
+############################# reshash-hook ###################################
+##############################################################################
+
+zshcache_time="$(date +%s%N)"
+
+autoload -Uz add-zsh-hook
+
+rehash_precmd() {
+      if [[ -a /var/cache/zsh/pacman ]]; then
+         local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
+         if (( zshcache_time < paccache_time )); then
+            rehash
+            zshcache_time="$paccache_time"
+         fi
+       fi
+}
+
+add-zsh-hook -Uz precmd rehash_precmd
+
+# If the precmd hook is triggered before /var/cache/zsh/pacman is updated,
+# completion may not work until a new prompt is initiated. Running an empty
+# command, e.g. pressing enter, should be sufficient.
+
+########################### Colored output for man ########################
+###########################################################################
+
+man() {
+    LESS_TERMCAP_md=$'\e[01;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
+}
+                            
+
 # For a full list of active aliases, run `alias`.
