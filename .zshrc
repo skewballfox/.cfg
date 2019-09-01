@@ -9,10 +9,7 @@ POWERLEVEL9K_MODE='awesome-fontconfig'
  export PATH=$HOME/bin:/usr/local/bin:$PATH
  export PATH=$HOME/.dotnet/tools:$PATH
 
-# Path to your oh-my-zsh installation.
-  export ZSH="/home/daedalus/.oh-my-zsh"
-
-#for running npm without global permissions
+# for running npm without global permissions
 export NPM_PACKAGES="/home/daedalus/.npm-packages"
 export NODE_PATH="$NPM_PACKAGES/lib/node_modules${NODE_PATH:+:$NODE_PATH}"
 export PATH="$NPM_PACKAGES/bin:$PATH"
@@ -26,7 +23,12 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="false"
+
+#configure the history
+HISTFILE=.config/zsh/history/zhistory
+HISTSIZE=1000
+SAVEHIST=1000
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -54,20 +56,10 @@ source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 # much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Plugins to load
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
@@ -80,11 +72,12 @@ plugins=(
   taskwarrior
   buku
 )
+#enable autocompletion for aliases
+setopt COMPLETE_ALIASES
 
-#rice rice baby
-source $ZSH/oh-my-zsh.sh
 #to search for package if command isn't found
 source /usr/share/doc/pkgfile/command-not-found.zsh
+
 #to use zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
