@@ -1,5 +1,6 @@
-# i3 config file (v4)
-#
+############################# i3 config file (v4) ########################################
+##########################################################################################
+
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
@@ -10,11 +11,34 @@ set $mod Mod4
 font pango:Droid Sans Mono 8
 
 # disable windows titlebars, while preserving border
-for window [class=".*"] border pixel 0
+for_window [class=".*"] border pixel 8
+
+# default border pixel size
+default_border pixel 8
+
+# Activate smart borders when no gaps present
+smart_borders no_gaps
+
+# focus follows mouse
+focus_follows_mouse yes
+
+################################ color_scheme ############################################
+##########################################################################################
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.background       #ffffff
+
 # set keyboard layout
 exec_always "setxkbmap -model pc104 -layout us,gb -variant ,, -option grp:alt_shift_toggle"
 
-# Autostart
+################################# Autostart #############################################
+#########################################################################################
+
 exec systemctl --user import-environment PATH
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id compton -b &
@@ -27,11 +51,13 @@ exec --no-startup-id thunar --daemon &
 exec --no-startup-id blueman-applet &
 exec --no-startup-id udiskie --no-automount --tray --use-udisks2 &
 exec --no-startup-id aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
-exec --no-startup-id xautolock -time 5 -corner 0-00 -locker 'i3lock-fancy --pixelate -- scrot -z' -detectsleep
+exec --no-startup-id xautolock -time 5 -corner 0-00 -detectsleep -locker i3lock-fancy --pixelate -- scrot -z
 # exec --no-startup-id conky -c ~/path/to/.conkyrc
 
 
-#USER DEFINED KEYS
+############################# Keybindings #################################################
+###########################################################################################
+
 bindsym $mod+j exec --no-startup-id firefox-developer-edition
 bindsym $mod+k exec code 
 bindsym $mod+Shift+l exec i3lock-fancy
@@ -170,6 +196,9 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+################################### status bar ##########################################
+#########################################################################################
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

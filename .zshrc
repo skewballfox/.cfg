@@ -5,6 +5,13 @@ export TERM="xterm-256color"
 source /usr/share/fonts/awesome-terminal-fonts/*.sh
 POWERLEVEL9K_MODE='awesome-fontconfig'
 
+# enable command completion
+autoload -Uz compinit
+compinit
+
+# enable commong keybindings
+source $HOME/.config/zsh/scripts/keybindings.zsh
+
 # If you come from bash you might have to change your $PATH.
  export PATH=$HOME/bin:/usr/local/bin:$PATH
  export PATH=$HOME/.dotnet/tools:$PATH
@@ -22,8 +29,11 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 #checking out powerlevel9k
 source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 
-# Uncomment the following line to use case-sensitive completion.
+#Use case-insensitive completion.
 CASE_SENSITIVE="false"
+
+# Enable command rehashing
+zstyle ':completion:*' rehash true
 
 #configure the history
 HISTFILE=.config/zsh/history/zhistory
@@ -139,6 +149,9 @@ export SLog_directory="$HOME/Gdrive/self_log"
 #the location of system tools
 export Sys_Tools_Directory="$HOME/Workspace/System_Tools"
 
+#because I hate a cluttered home
+export TASKRC="$HOME/.config/task_warrior/taskrc"
+export TASKDATA="$HOME/Gdrive/task_warrior/taskrc"
 ############################# reshash-hook ###################################
 ##############################################################################
 
