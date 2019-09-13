@@ -1,5 +1,5 @@
 {
-    "markdown-pdf.convertOnSave": false,
+    "markdown-pdf.convertOnSave": true,
     "markdown-pdf.executablePath": "/usr/bin/chromium",
     "markdownTableFormatter.enable":true,
     "terminal.integrated.rendererType": "dom",
@@ -12,4 +12,9 @@
     "[markdown]": {
         "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
+    "markdown-pdf.clip.height": 1,
+    "markdown-pdf.clip.width": 1,
+    "markdown-pdf.clip.x": 1,
+    "markdown-pdf.clip.y": 1,
+    "markdown-pdf.breaks": true,
 }

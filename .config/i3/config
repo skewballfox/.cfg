@@ -11,13 +11,13 @@ set $mod Mod4
 font pango:Droid Sans Mono 8
 
 # disable windows titlebars, while preserving border
-for_window [class=".*"] border pixel 8
+for_window [class=".*"] border pixel 3
 
 # default border pixel size
 default_border pixel 8
 
 # Activate smart borders when no gaps present
-smart_borders no_gaps
+smart_borders on
 
 # focus follows mouse
 focus_follows_mouse yes

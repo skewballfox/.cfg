@@ -16,9 +16,13 @@ noblacklist ${HOME}/.pythonrc.py
 noblacklist ${HOME}/.vscode
 noblacklist ${HOME}/.vscode-oss
 
+noblacklist /usr/bin/chromium
+
 include disable-common.inc
 include disable-passwdmgr.inc
 include disable-programs.inc
+
+
 
 caps.drop all
 ignore net

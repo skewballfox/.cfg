@@ -136,6 +136,8 @@ alias grep='grep --color=auto'
 alias zr='source $HOME/.zshrc'
 #reading list
 alias rtask="task rc.data.location=~/gdrive/.reading_list"
+#markdown to pdf conversion, will complete later
+alias md2p="pandoc --from markdown --to markdown --wrap=preserve --reference-links --output Downloads/OS_HW.md Workspace/Classes/Operating_Systems/HW/OS_Homework.md"
 
 ############################### Environment Variables ########################
 ##############################################################################
