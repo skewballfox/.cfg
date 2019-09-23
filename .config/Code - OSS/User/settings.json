@@ -1,6 +1,4 @@
 {
-    "markdown-pdf.convertOnSave": true,
-    "markdown-pdf.executablePath": "/usr/bin/chromium",
     "markdownTableFormatter.enable":true,
     "terminal.integrated.rendererType": "dom",
     "editor.fontFamily": "Fira Code",

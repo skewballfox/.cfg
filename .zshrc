@@ -143,7 +143,7 @@ alias md2p="pandoc --from markdown --to markdown --wrap=preserve --reference-lin
 ##############################################################################
 
 #using rust
-export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:~/.cargo/bin:$HOME/.local/bin
 
 #the location of the self_log directory
 export SLog_directory="$HOME/Gdrive/self_log"
@@ -154,6 +154,12 @@ export Sys_Tools_Directory="$HOME/Workspace/System_Tools"
 #because I hate a cluttered home
 export TASKRC="$HOME/.config/task_warrior/taskrc"
 export TASKDATA="$HOME/Gdrive/task_warrior/taskrc"
+
+#for using docsets from the commandline
+export DASHT_DOCSETS_DIR=$HOME/.local/share/Zeal/Zeal/docsets
+
+#for changing the default QT style
+export QT_STYLE_OVERRIDE=kvantum
 ############################# reshash-hook ###################################
 ##############################################################################
 
