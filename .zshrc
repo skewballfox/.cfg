@@ -2,7 +2,7 @@
 export TERM="xterm-256color"
 
 #to enable patched glyphs
-source /usr/share/fonts/awesome-terminal-fonts/*.sh
+source ~/.fonts/*.sh
 POWERLEVEL9K_MODE='awesome-fontconfig'
 
 # enable command completion
@@ -27,7 +27,7 @@ unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 #checking out powerlevel9k
-source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+source ~/Workspace/Packages/powerlevel9k/powerlevel9k.zsh-theme
 
 #Use case-insensitive completion.
 CASE_SENSITIVE="false"
@@ -74,22 +74,19 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  archlinux
+  #archlinux
   python
   rust
   rustup
   adb
-  taskwarrior
-  buku
 )
 #enable autocompletion for aliases
 setopt COMPLETE_ALIASES
 
 #to search for package if command isn't found
-source /usr/share/doc/pkgfile/command-not-found.zsh
 
 #to use zsh-syntax-highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
@@ -112,7 +109,6 @@ fi
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 # completion for powerpill
 
-compdef _pacman powerpill=pacman
 
 ##################### 9k tweaks ################################################
 ################################################################################
@@ -127,7 +123,7 @@ POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 #the below is to allow aliases to be passed to sudo
 alias sudo='sudo '
 #the below is to backup my dotfiles to github
-alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias config='git --git-dir=$HOME/.config/cfg/ --work-tree=$HOME'
 #the below alias is to modify default ls behavior
 alias ls='ls -1lih --color=auto'
 #color output with grep
@@ -137,7 +133,7 @@ alias zr='source $HOME/.zshrc'
 #reading list
 alias rtask="task rc.data.location=~/gdrive/.reading_list"
 #markdown to pdf conversion, will complete later
-alias md2p="pandoc --from markdown --to markdown --wrap=preserve --reference-links --output Downloads/OS_HW.md Workspace/Classes/Operating_Systems/HW/OS_Homework.md"
+alias md2p="pandoc --from markdown --to markdown --wrap=preserve --reference-links --output Downloads/OS_HW.md Workspace$/Classes/Operating_Systems/HW/OS_Homework.md"
 
 ############################### Environment Variables ########################
 ##############################################################################
@@ -151,37 +147,12 @@ export SLog_directory="$HOME/Gdrive/self_log"
 #the location of system tools
 export Sys_Tools_Directory="$HOME/Workspace/System_Tools"
 
-#because I hate a cluttered home
-export TASKRC="$HOME/.config/task_warrior/taskrc"
-export TASKDATA="$HOME/Gdrive/task_warrior/taskrc"
-
 #for using docsets from the commandline
 export DASHT_DOCSETS_DIR=$HOME/.local/share/Zeal/Zeal/docsets
 
 #for changing the default QT style
-export QT_STYLE_OVERRIDE=kvantum
-############################# reshash-hook ###################################
-##############################################################################
+#export QT_STYLE_OVERRIDE=kvantum
 
-zshcache_time="$(date +%s%N)"
-
-autoload -Uz add-zsh-hook
-
-rehash_precmd() {
-      if [[ -a /var/cache/zsh/pacman ]]; then
-         local paccache_time="$(date -r /var/cache/zsh/pacman +%s%N)"
-         if (( zshcache_time < paccache_time )); then
-            rehash
-            zshcache_time="$paccache_time"
-         fi
-       fi
-}
-
-add-zsh-hook -Uz precmd rehash_precmd
-
-# If the precmd hook is triggered before /var/cache/zsh/pacman is updated,
-# completion may not work until a new prompt is initiated. Running an empty
-# command, e.g. pressing enter, should be sufficient.
 
 ########################### Colored output for man ########################
 ###########################################################################

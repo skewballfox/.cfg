@@ -43,15 +43,15 @@ exec systemctl --user import-environment PATH
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id compton -b &
 exec --no-startup-id feh --randomize --bg-scale ~/.wallpapers/* &
-exec --no-startup-id autocutsel
+# exec --no-startup-id autocutsel
 exec --no-startup-id nm-applet &
 exec --no-startup-id redshift-gtk &
 exec --no-startup-id dunst &
-exec --no-startup-id thunar --daemon &
-exec --no-startup-id blueman-applet &
+# exec --no-startup-id thunar --daemon &
+# exec --no-startup-id blueman-applet &
 exec --no-startup-id udiskie --no-automount --tray --use-udisks2 &
-exec --no-startup-id aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
-exec --no-startup-id xautolock -time 5 -corner 0-00 -detectsleep -locker i3lock-fancy --pixelate -- scrot -z
+# exec --no-startup-id aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
+#exec --no-startup-id xautolock -time 5 -corner 0-00 -detectsleep -locker i3lock-fancy --pixelate -- scrot -z
 # exec --no-startup-id conky -c ~/path/to/.conkyrc
 
 
@@ -59,7 +59,7 @@ exec --no-startup-id xautolock -time 5 -corner 0-00 -detectsleep -locker i3lock-
 ###########################################################################################
 
 # Application Launchers
-bindsym $mod+j exec --no-startup-id firefox-developer-edition
+bindsym $mod+j exec --no-startup-id firefox
 bindsym $mod+k exec $HOME/.config/i3/workspaces/coding_workspace.zsh 
 bindsym $mod+Shift+l exec i3lock-fancy
 bindsym $mod+p exec passmenu
@@ -80,7 +80,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -204,5 +204,17 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        #font pango:DejaVu Sans Mono, FontAwesome 12
+        font pango:Droid Sans Mono, FontAwesome 12
+        position bottom
+        status_command ~/Media/Packages/i3status-rs ~/.config/i3/status.toml
+    colors {
+        separator #666666
+        background #222222
+        statusline #dddddd
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace #2f343a #900000 #ffffff
+    }
 }

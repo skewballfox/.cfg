@@ -1,12 +1,69 @@
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+
+plug "alexherbo2/auto-pairs.kak"
+######################## Editor Behavior ##########################
+###################################################################
+
+# indentation
+set global tabstop 2
+set global indentwidth 4
+
+# replace tab with spaces
+hook global InsertChar \t %{ exec -draft -itersel h@ }
+
+
+####################### Autocompletion ##########################
+#################################################################
+
 hook global InsertCompletionShow .* %{
-        try %{
-              exec -draft 'h<a-K>\h<ret>'
-              map window insert <s-tab> <c-p>
-              map window insert <tab> <c-n>
-        }
+    try %{
+        exec -draft 'h<a-K>\h<ret>'
+        map window insert <s-tab> <c-p>
+        map window insert <tab> <c-n>
+    }
 }
 hook global InsertCompletionHide .* %{
-        unmap window insert <tab> <c-n>
-        unmap window insert <s-tab> <c-p>
+    unmap window insert <tab> <c-n>
+    unmap window insert <s-tab> <c-p>
 }
 
+###################### Editor Apperance #########################
+#################################################################
+
+# line numbers
+add-highlighter global/ number-lines
+
+
+##################### Language support #########################
+################################################################
+
+#Rust
+hook global WinSetOption filetype=rust %{
+    auto-pairs enable
+    autowrap-enable
+    set window formatcmd 'rustfmt'
+}
+
+#markdown
+hook global WinSetOption filetype=markdown %{
+    set-option -add buffer auto_pairs_surround _ _ * *
+    add-highlighter global/wrap wrap -word
+}
+
+#python
+hook global WinSetOption filetype=python %{
+    set window autowrap_column 80
+    auto-pairs enable
+    jedi-enable-autocomplete
+    lint-enable
+    set-option global lintcmd 'flake8'
+}
+
+#C++
+hook global WinSetOption filetype=(c|cpp) %{
+    auto-pairs enable
+    clang-enable-autocomplete
+    clang-enable-diagnostics
+    alias window lint clang-parse
+    alias window lint-next-error clang-diagnostics-next
+}
