@@ -1,0 +1,41 @@
+{
+    "terminal.integrated.rendererType": "dom",
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "terminal.external.linuxExec": "alacritty",
+    "explorer.confirmDelete": false,
+    "git.enableSmartCommit": true,
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "editor.tabCompletion": "on",
+    "python.formatting.provider": "black",
+    "git.autofetch": true,
+    "better-comments.highlightPlainText": true,
+    "git.confirmSync": false,
+    "terminal.integrated.shell.linux": "/bin/fish",
+    "terminal.integrated.fontFamily": "Fira Code",
+    "editor.matchBrackets": false,
+    
+        // // TODO: Add files that you want to be included in IntelliSense at all times.
+        // // Enable to get autocomplete for the entire project (as opposed to just open files). It's a
+        // // good idea to read the All Autocomplete extension's documentation to understand the performance
+        // // impact of specific settings.
+    "AllAutocomplete.wordListFiles": ["/src/"],
+    "code-runner.executorMap": {
+        "javascript": "node",
+        //"php": "",
+        "python": "python3",
+        "perl": "perl",
+        
+        
+        "rust": "cd $dir && cargo build && $dir$fileNameWithoutExt"
+        //"ruby": "",
+        //"go": "go run",
+        //"html": "\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\"",
+        //"java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        //"c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    },
+    "dimmer.enabled": true
+ 
+}
