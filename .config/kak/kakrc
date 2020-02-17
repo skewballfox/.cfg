@@ -1,12 +1,19 @@
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "alexherbo2/auto-pairs.kak"
+plug "occivink/kakoune-snippets" config %{
+  set-option -add global snippet_directories "%opt{~/.config/kak/plugins/kakoune-snippet-collection/snippets"
+  #other snippet optons
+  }
+
+plug "andreyorst/kakoune-snippet-collection"
+
 ######################## Editor Behavior ##########################
 ###################################################################
 
 # indentation
 set global tabstop 2
-set global indentwidth 4
+set global indentwidth 2
 
 # replace tab with spaces
 hook global InsertChar \t %{ exec -draft -itersel h@ }
@@ -67,3 +74,6 @@ hook global WinSetOption filetype=(c|cpp) %{
     alias window lint clang-parse
     alias window lint-next-error clang-diagnostics-next
 }
+
+#Java
+#hook global WinSetOption filetype(.java)
