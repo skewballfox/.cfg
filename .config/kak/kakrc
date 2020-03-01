@@ -2,7 +2,7 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "alexherbo2/auto-pairs.kak"
 plug "occivink/kakoune-snippets" config %{
-  set-option -add global snippet_directories "%opt{~/.config/kak/plugins/kakoune-snippet-collection/snippets"
+  set-option -add global snippet_directories "%opt{~/.config/kak/plugins/kakoune-snippet-collection/snippets}"
   #other snippet optons
   }
 
@@ -13,7 +13,7 @@ plug "andreyorst/kakoune-snippet-collection"
 
 # indentation
 set global tabstop 2
-set global indentwidth 2
+set global indentwidth 4
 
 # replace tab with spaces
 hook global InsertChar \t %{ exec -draft -itersel h@ }
