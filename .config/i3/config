@@ -40,8 +40,9 @@ exec_always "setxkbmap -model pc104 -layout us,gb -variant ,, -option grp:alt_sh
 #########################################################################################
 
 exec systemctl --user import-environment PATH
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-exec --no-startup-id compton -b &
+#exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
+#exec --no-startup-id compton -b &
 exec --no-startup-id feh --randomize --bg-scale ~/Media/Images/wallpapers/* &
 # exec --no-startup-id autocutsel
 exec --no-startup-id nm-applet &
@@ -200,6 +201,7 @@ bindsym $mod+r mode "resize"
 
 ################################### KDE WINDOW BEHAVIOR ################################
 ########################################################################################
+exec --no-startup-id wmctrl -c Plasma 
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
 for_window [class="plasmashell"] floating enable;
 for_window [class="Plasma"] floating enable; border none
@@ -212,6 +214,10 @@ for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px, no_focus
 
+################################### OTHER WINDOW BEHAVIOR ########################
+##################################################################################
+
+for_window [title="Connections"] floating enable;
 
 ################################### status bar ##########################################
 #########################################################################################
@@ -220,9 +226,9 @@ for_window [class="plasmashell" window_type="notification"] floating enable, bor
 # finds out, if available)
 bar {
         #font pango:DejaVu Sans Mono, FontAwesome 12
-        font pango:Droid Sans Mono, FontAwesome 12
+        font pango:Fira Code, FontAwesome 12
         position bottom
-        status_command ~/Media/Packages/i3status-rs ~/.config/i3/status.toml
+        status_command i3status-rs ~/.config/i3/status.toml
     colors {
         separator #666666
         background #222222
