@@ -42,7 +42,7 @@ exec_always "setxkbmap -model pc104 -layout us,gb -variant ,, -option grp:alt_sh
 exec systemctl --user import-environment PATH
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
-#exec --no-startup-id compton -b &
+exec --no-startup-id compton -b &
 exec --no-startup-id feh --randomize --bg-scale ~/Media/Images/wallpapers/* &
 # exec --no-startup-id autocutsel
 exec --no-startup-id nm-applet &
