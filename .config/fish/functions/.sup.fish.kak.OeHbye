@@ -1,0 +1,6 @@
+function sup
+    if command -v termux-setup-storage
+        pkg upgrade
+    else if command -v dnf
+        sudo dnf upgrade
+        
