@@ -1,11 +1,11 @@
 #login
 #if status --is-login
     # Environment Variables
-    #set -x NPM_PACKAGES "$HOME/.local/npm_packages"
-    #set -x NODE_PATH $NPM_PACKAGES/lib/node_modules{$NODE_PATH}
+    set -x NPM_PACKAGES "$HOME/.local/npm_packages"
+    set -x NODE_PATH $NPM_PACKAGES/lib/node_modules{$NODE_PATH}
 #    set -x PATH $HOME/.local/bin $HOME/.cargo/bin $NPM_PACKAGES/bin $PATH
 #    set -x MANPATH $NPM_PACKAGES/share/man $MANPATH
-#    set -x EDITOR kak
+    set -x EDITOR kak
 #    if command -v i3-config-wizard
         
 #end
@@ -16,10 +16,12 @@ alias dfconfig "git --git-dir=$HOME/.config/git/cfg/ --work-tree=$HOME"
 
 alias ls "ls -1lih --color=auto"
 
-alias grep="grep --color=auto"
+alias grep "grep --color=auto"
+
+#alias ranger "ranger-cd" 
 
 # Prompt and aesthetics
 
 function fish_prompt
-    powerline-rs  $status --shell bare
+    powerline-rs  $status --cwd-max-dir-size 10 --shell bare
 end

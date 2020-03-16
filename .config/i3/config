@@ -34,18 +34,20 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
 # set keyboard layout
-exec_always "setxkbmap -model pc104 -layout us,gb -variant ,, -option grp:alt_shift_toggle"
+#exec_always "setxkbmap -model pc104 -layout us,gb -variant ,, -option grp:alt_shift_toggle"
 
 ################################# Autostart #############################################
 #########################################################################################
 
 exec systemctl --user import-environment PATH
+#Add the commented out options to systemd --user service
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
+#exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
+#add compton to systemd --user service
 exec --no-startup-id compton -b &
 exec --no-startup-id feh --randomize --bg-scale ~/Media/Images/wallpapers/* &
 # exec --no-startup-id autocutsel
-exec --no-startup-id nm-applet &
+#exec --no-startup-id nm-applet &
 exec --no-startup-id redshift-gtk &
 exec --no-startup-id dunst &
 # exec --no-startup-id thunar --daemon &
@@ -61,8 +63,8 @@ exec --no-startup-id udiskie --no-automount --tray --use-udisks2 &
 
 # Application Launchers
 bindsym $mod+j exec --no-startup-id firefox
-bindsym $mod+k exec $HOME/.config/i3/workspaces/coding_workspace.zsh 
-bindsym $mod+Shift+l exec i3lock-fancy
+#bindsym $mod+k exec $HOME/.config/i3/workspaces/coding_workspace.zsh 
+#bindsym $mod+Shift+l exec i3lock-fancy
 bindsym $mod+p exec passmenu
 
 bindsym Print exec "scrot -e 'mv $f ~/Media/Photos/Screenshots/'"
@@ -180,12 +182,6 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
@@ -201,7 +197,13 @@ bindsym $mod+r mode "resize"
 
 ################################### KDE WINDOW BEHAVIOR ################################
 ########################################################################################
-exec --no-startup-id wmctrl -c Plasma 
+exec --no-startup-id wmctrl -c Plasma
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+
+for_window [class="systemsettings"] floating enable
+
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
 for_window [class="plasmashell"] floating enable;
 for_window [class="Plasma"] floating enable; border none
@@ -227,8 +229,9 @@ for_window [title="Connections"] floating enable;
 bar {
         #font pango:DejaVu Sans Mono, FontAwesome 12
         font pango:Fira Code, FontAwesome 12
-        position bottom
+        position top
         status_command i3status-rs ~/.config/i3/status.toml
+        mode hide
     colors {
         separator #666666
         background #222222
