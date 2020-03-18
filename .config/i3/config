@@ -44,7 +44,8 @@ exec systemctl --user import-environment PATH
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 #exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
 #add compton to systemd --user service
-exec --no-startup-id compton -b &
+exec --no-startup-id picom -b &
+#exec --no-startup-id compton -b &
 exec --no-startup-id feh --randomize --bg-scale ~/Media/Images/wallpapers/* &
 # exec --no-startup-id autocutsel
 #exec --no-startup-id nm-applet &
@@ -90,8 +91,10 @@ bindsym $mod+Shift+q kill
 
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+#use krunner
+bindsym $mod+d exec --no-startup-id krunner
 # change focused window
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -209,7 +212,7 @@ for_window [class="plasmashell"] floating enable;
 for_window [class="Plasma"] floating enable; border none
 for_window [title="plasma-desktop"] floating enable; border none
 for_window [title="win7"] floating enable; border none
-for_window [class="krunner"] floating enable; border none
+for_window [class="krunner"] floating enable; move position center; border none
 for_window [class="Kmix"] floating enable; border none
 for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none

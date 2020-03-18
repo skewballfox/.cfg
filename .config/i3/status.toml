@@ -1,15 +1,21 @@
-theme = "solarized-dark"
+theme = "bad-wolf"
 icons = "awesome"
 
 [[block]]
-block = "disk_space"
-path = "/"
-alias = "/"
-info_type = "available"
-unit = "GB"
-interval = 20
-warning = 20.0
-alert = 10.0
+block = "net"
+device="wlp2s0"
+ip=true
+
+
+[[block]]
+block = "speedtest"
+bytes = true
+
+
+[[block]]
+block = "temperature"
+collapsed = false
+interval = 10
 
 [[block]]
 block = "memory"
@@ -26,10 +32,13 @@ block = "load"
 interval = 1
 format = "{1m}"
 
-[[block]]
-block = "sound"
 
 [[block]]
-block = "time"
-interval = 60
-format = "%a %d/%m %R"
+block = "disk_space"
+path = "/"
+alias = "/"
+info_type = "available"
+unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0

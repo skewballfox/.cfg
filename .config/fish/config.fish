@@ -1,14 +1,15 @@
 #login
-#if status --is-login
+if status --is-login
     # Environment Variables
     set -x NPM_PACKAGES "$HOME/.local/npm_packages"
-    set -x NODE_PATH $NPM_PACKAGES/lib/node_modules{$NODE_PATH}
-#    set -x PATH $HOME/.local/bin $HOME/.cargo/bin $NPM_PACKAGES/bin $PATH
-#    set -x MANPATH $NPM_PACKAGES/share/man $MANPATH
+    set -x npm_config_prefix $NPM_PACKAGES/lib/node_modules
+    #still trying to figure out how to handle env variales that are arrays
+    set  NODE_PATH $NPM_PACKAGES/lib/node_modules{$NODE_PATH}
+    set  MANPATH "$MANPATH:$NPM_PACKAGES/share/man"
     set -x EDITOR kak
-#    if command -v i3-config-wizard
-        
-#end
+    #set -x TERM
+    #if command -v i3-config-wizard        
+end
 
 # Aliases
 
