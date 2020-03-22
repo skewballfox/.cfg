@@ -4,15 +4,30 @@ plug "alexherbo2/auto-pairs.kak"
 
 plug "alexherbo2/surround.kak"
 
+plug "aparkerdavid/kakoune-rainbow"
+
+plug "andreyorst/kaktree" config %{
+    hook global WinSetOption filetype=kaktree %{
+        remove-highlighter buffer/numbers
+        remove-highlighter buffer/matching
+        remove-highlighter buffer/wrap
+        remove-highlighter buffer/show-whitespaces
+    }
+    kaktree-enable
+}
+
 plug "occivink/kakoune-snippets" config %{
-  set-option -add global snippet_directories "%opt{~/.config/kak/plugins/kakoune-snippet-collection/snippets}"
+  set-option -add global snippets_directories "%opt{plug_install_dir}/kakoune-snippet-collection/snippets"
   #other snippet optons
   }
 
 plug "skewballfox/kakoune-snippet-collection"
-
+#NOTE in case of bug: Removing 
 plug "ul/kak-lsp" do %{
-    cargo install --locked --force --path .
+    if [[ "$(command -v termux-setup-storage)" ]]; then
+        cargo build --release --locked
+        cargo install --force --path .
+    fi
 } config %{
       # uncomment to enable debugging
       # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
@@ -48,6 +63,9 @@ plug "ul/kak-lsp" do %{
               }
           }
       }
+      #for python language server
+      set-option global lsp_server_configuration pyls.configurationSources=["black"]
+
       hook global KakEnd .* lsp-exit
 }
 
@@ -91,8 +109,8 @@ add-highlighter global/ number-lines
 
 #Rust
 hook global WinSetOption filetype=rust %{
-    auto-pairs enable
-    autowrap-enable
+    auto-pairs-enable
+    
     set window formatcmd 'rustfmt'
 }
 
@@ -103,9 +121,11 @@ hook global WinSetOption filetype=markdown %{
 }
 
 #python
+
+
 hook global WinSetOption filetype=python %{
     set window autowrap_column 80
-    auto-pairs enable
+    auto-pairs-enable
     jedi-enable-autocomplete
     lint-enable
     set-option global lintcmd 'flake8'
@@ -113,7 +133,7 @@ hook global WinSetOption filetype=python %{
 
 #C++
 hook global WinSetOption filetype=(c|cpp) %{
-    auto-pairs enable
+    auto-pairs-enable
     clang-enable-autocomplete
     clang-enable-diagnostics
     alias window lint clang-parse

@@ -12,5 +12,5 @@ function sup
     pip install --user (pip list --user --outdated | tail -n +3 | awk '{print $1}') --upgrade
     echo -e "\nupgrading npm global installs\n"
     npm update -g
-        
+end        
         
