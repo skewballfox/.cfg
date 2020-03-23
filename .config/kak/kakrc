@@ -22,12 +22,10 @@ plug "occivink/kakoune-snippets" config %{
   }
 
 plug "skewballfox/kakoune-snippet-collection"
-#NOTE in case of bug: Removing 
+
 plug "ul/kak-lsp" do %{
-    if [[ "$(command -v termux-setup-storage)" ]]; then
-        cargo build --release --locked
-        cargo install --force --path .
-    fi
+    cargo build --release --locked
+    cargo install --force --path .
 } config %{
       # uncomment to enable debugging
       # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
