@@ -26,3 +26,4 @@ alias grep "grep --color=auto"
 function fish_prompt
     powerline-rs  $status --cwd-max-dir-size 10 --shell bare
 end
+
