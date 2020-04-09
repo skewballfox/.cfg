@@ -6,8 +6,9 @@ if status --is-login
     #still trying to figure out how to handle env variales that are arrays
     set  NODE_PATH $NPM_PACKAGES/lib/node_modules{$NODE_PATH}
     set  MANPATH "$MANPATH:$NPM_PACKAGES/share/man"
+    set -x LD_LIBRARY_PATH /usr/lib64/openmpi
     set -x EDITOR kak
-    #set -x TERM
+    set -x TERM alacritty
     #if command -v i3-config-wizard        
 end
 
