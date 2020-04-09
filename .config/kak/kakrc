@@ -2,7 +2,8 @@
 
 evaluate-commands %sh{
     config_files="
-        plugins.kak
+    	plugins.kak
+        languages.kak
     "
 
     for file in $config_files; do
@@ -43,7 +44,6 @@ hook global InsertCompletionHide .* %{
 #################################################################
 
 # line numbers
-add-highlighter global/ number-lines
 hook global WinCreate .* %{
     add-highlighter window/numbers          number-lines -hlcursor -separator ' '
     add-highlighter window/matching         show-matching

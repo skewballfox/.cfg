@@ -1,7 +1,7 @@
 
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
-source "andreyorst/plug.kak" noload
+#source "andreyorst/plug.kak" noload
 plug "alexherbo2/auto-pairs.kak" config %{
     hook global WinSetOption filetype=markdown %{
         set-option -add buffer auto_pairs_surround $$$ $$$ $ $ _ _ * *
