@@ -1,5 +1,3 @@
-
-
 evaluate-commands %sh{
     config_files="
     	plugins.kak
@@ -7,11 +5,17 @@ evaluate-commands %sh{
     "
 
     for file in $config_files; do
-        printf "%s\n" "try %{
-            source '$HOME/.config/kak/$file'
+        printf "%s\n" "
+         try %{
+            source %{$HOME/.config/kak/$file}
+            echo $file success            
         } catch %{
-            try %{ echo -debug \"%val{error}\" } catch { echo -debug 'Error sourcing $file' }
-        }"
+            echo yeet $file 
+            
+            echo -debug %val{error}
+        }
+        
+        "
     done
 }
 ######################## Editor Behavior ##########################

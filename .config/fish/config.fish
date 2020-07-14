@@ -9,6 +9,7 @@ if status --is-login
     set -x LD_LIBRARY_PATH /usr/lib64/openmpi
     set -x EDITOR kak
     set -x TERM alacritty
+    set -x TERMCMD alacritty
     #if command -v i3-config-wizard        
 end
 
