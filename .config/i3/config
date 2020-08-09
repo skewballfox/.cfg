@@ -65,10 +65,10 @@ exec --no-startup-id udiskie --no-automount --tray --use-udisks2 &
 bindsym $mod+j exec --no-startup-id firefox
 #bindsym $mod+k exec $HOME/.config/i3/workspaces/coding_workspace.zsh 
 #bindsym $mod+Shift+l exec i3lock-fancy
-bindsym $mod+p exec passmenu
+#bindsym $mod+p exec passmenu
 
-bindsym Print exec "scrot -e 'mv $f ~/Media/Photos/Screenshots/'"
-bindsym $mod+Print exec "scrot -ue 'mv $f ~/Media/Photos/Screenshots'"
+#bindsym Print exec "scrot -e 'mv $f ~/Media/Photos/Screenshots/'"
+#bindsym $mod+Print exec "scrot -ue 'mv $f ~/Media/Photos/Screenshots'"
 
 # Media volume controls
 bindsym XF86AudioMute exec amixer sset 'Master' toggle
@@ -93,7 +93,7 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 #use krunner
-bindsym $mod+d exec --no-startup-id krunner
+bindsym $mod+d exec --no-startup-id rofi -show drun
 # change focused window
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -173,8 +173,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

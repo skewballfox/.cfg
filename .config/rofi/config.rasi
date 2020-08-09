@@ -1,0 +1,11 @@
+configuration {
+    modi: "drun";
+    theme: "Monokai";
+    show-icons: true;
+    lines: 7;
+    eh: 2;
+    icon-theme: "Flatery-Dark";
+    fake-transparency: true;
+    fullscreen: true;
+    font: "Fira Code 12";
+}

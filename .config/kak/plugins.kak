@@ -2,6 +2,9 @@
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "andreyorst/plug.kak" noload
+
+#dependency of auto-pairs
+plug "alexherbo2/prelude.kak"
 plug "alexherbo2/auto-pairs.kak" config %{
     hook global WinSetOption filetype=markdown %{
         set-option -add buffer auto_pairs_surround $$$ $$$ $ $ _ _ * *
@@ -9,7 +12,7 @@ plug "alexherbo2/auto-pairs.kak" config %{
 }
 plug "alexherbo2/surround.kak"
 
-plug "aparkerdavid/kakoune-rainbow"
+#plug "aparkerdavid/kakoune-rainbow"
 
 plug "andreyorst/kaktree" config %{
     hook global WinSetOption filetype=kaktree %{
@@ -21,7 +24,7 @@ plug "andreyorst/kaktree" config %{
     kaktree-enable
 }
 
-plug "occivink/kakoune-gdb"
+#plug "occivink/kakoune-gdb"
 
 
 plug "lePerdu/kakboard" %{
@@ -65,22 +68,21 @@ plug "ul/kak-lsp" do %{
       #for python language server
      
       hook global WinSetOption filetype=python %{
-      set-option window lsp_server_configuration pyls.configurationSources=["flake8"]
+      #set-option window lsp_server_configuration pyls.configurationSources=["flake8"]
       set-option window lsp_server_configuration pyls.plugins.pyls_mypy.enabled=true
       set-option window lsp_server_configuration pyls.plugins.pyls_mypy.live_mode=false
       hook window BufWritePre .* lsp-formatting-sync
       }
       hook global KakEnd .* lsp-exit
 }
-
 #plug 'delapouite/kakoune-i3' %{
 #      # Suggested mapping
 #       map global user 3 ': enter-user-mode i3<ret>' -docstring 'i3…'
 #
 
-#plug "occivink/kakoune-snippets" config %{
-#  set-option -add global snippets_directories "%opt{plug_install_dir}/kakoune-snippet-collection/snippets"
-#  #other snippet optons
-#  }
+plug "occivink/kakoune-snippets" config %{
+  set-option -add global snippets_directories "%opt{plug_install_dir}/kakoune-snippet-collection/snippets"
+  #other snippet optons
+  }
 
-#plug "skewballfox/kakoune-snippet-collection"
+plug "skewballfox/kakoune-snippet-collection"

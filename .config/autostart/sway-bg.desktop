@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Name=swaybg
+GenericName=Feh Background
+Comment=Create background for i3-session
+OnlyShowIn=sway
+Exec=output "*" bg `find ~/Media/Images/wallpapers -type f | shuf -n 1` fill
+Terminal=false
+Type=Application
+Categories=Utility;
+StartupNotify=true
+Hidden=true
+X-GNOME-Autostart-enabled=false
+

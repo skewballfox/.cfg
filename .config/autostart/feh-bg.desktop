@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Name=Feh
+GenericName=Feh Background
+Comment=Create background for i3-session
+NotShowIn=sway;
+Exec=feh --randomize --bg-scale ~/Media/Images/wallpapers/* &
+Terminal=false
+Type=Application
+Categories=Utility;
+StartupNotify=true
+Hidden=true
+X-GNOME-Autostart-enabled=false
+

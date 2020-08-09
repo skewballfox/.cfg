@@ -8,8 +8,7 @@ evaluate-commands %sh{
         printf "%s\n" "
          try %{
             source %{$HOME/.config/kak/$file}
-            echo $file success            
-        } catch %{
+         } catch %{
             echo yeet $file 
             
             echo -debug %val{error}
