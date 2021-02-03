@@ -3,14 +3,19 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "andreyorst/plug.kak" noload
 
-#dependency of auto-pairs
+#dependency of auto-pairs and snippets
 plug "alexherbo2/prelude.kak"
+
 plug "alexherbo2/auto-pairs.kak" config %{
     hook global WinSetOption filetype=markdown %{
         set-option -add buffer auto_pairs_surround $$$ $$$ $ $ _ _ * *
     }
 }
+
 plug "alexherbo2/surround.kak"
+
+#dependency of snippets
+plug "alexherbo2/phantom.kak"
 
 #plug "aparkerdavid/kakoune-rainbow"
 
@@ -36,8 +41,8 @@ plug "ul/kak-lsp" do %{
     cargo install --force --path .
 } config %{
       # uncomment to enable debugging
-      # eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
-      # set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
+      eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
+      set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 
 
       set global lsp_diagnostic_line_error_sign '!'
@@ -68,10 +73,14 @@ plug "ul/kak-lsp" do %{
       #for python language server
      
       hook global WinSetOption filetype=python %{
-      #set-option window lsp_server_configuration pyls.configurationSources=["flake8"]
-      set-option window lsp_server_configuration pyls.plugins.pyls_mypy.enabled=true
-      set-option window lsp_server_configuration pyls.plugins.pyls_mypy.live_mode=false
-      hook window BufWritePre .* lsp-formatting-sync
+          set-option window lsp_server_initialization_options %sh{echo python.interpreter.properties.InterpreterPath=\"$(which python)\"}
+
+          set-option window lsp_server_configuration settings.python.analysis.logLevel="Information"
+          set-option window lsp_server_configuration settings.python.linting.pylintEnabled=true
+          set-option global lsp_server_initialization_options python.interpreter.properties.UseDefaultDatabase=true
+          set-option global lsp_server_initialization_options %sh{echo python.interpreter.properties.Version=\"$(python -V | sed 's/.* //')\"}
+
+          hook window BufWritePre .* lsp-formatting-sync
       }
       hook global KakEnd .* lsp-exit
 }
@@ -80,9 +89,10 @@ plug "ul/kak-lsp" do %{
 #       map global user 3 ': enter-user-mode i3<ret>' -docstring 'i3…'
 #
 
-plug "occivink/kakoune-snippets" config %{
-  set-option -add global snippets_directories "%opt{plug_install_dir}/kakoune-snippet-collection/snippets"
-  #other snippet optons
-  }
+plug "alexherbo2/snippets.kak" %{
+    # Modules
+    require-module snippets-crystal
 
-plug "skewballfox/kakoune-snippet-collection"
+    # Options
+    set-option global snippets_scope global
+}

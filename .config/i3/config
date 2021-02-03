@@ -22,6 +22,9 @@ smart_borders on
 # focus follows mouse
 focus_follows_mouse yes
 
+# User Mouse+$mod to drag floating windows to a position
+floating_modifier $mod
+
 ################################ color_scheme ############################################
 ##########################################################################################
 
@@ -67,8 +70,8 @@ bindsym $mod+j exec --no-startup-id firefox
 #bindsym $mod+Shift+l exec i3lock-fancy
 #bindsym $mod+p exec passmenu
 
-#bindsym Print exec "scrot -e 'mv $f ~/Media/Photos/Screenshots/'"
-#bindsym $mod+Print exec "scrot -ue 'mv $f ~/Media/Photos/Screenshots'"
+#bindsym Print exec "scrot -e 'mv $f ~/Media/Images/Screenshots/'"
+#bindsym $mod+Print exec "scrot -ue 'mv $f ~/Media/Images/Screenshots'"
 
 # Media volume controls
 bindsym XF86AudioMute exec amixer sset 'Master' toggle
@@ -92,8 +95,9 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-#use krunner
+#use rofi
 bindsym $mod+d exec --no-startup-id rofi -show drun
+#bindsym $mod+d exec --no-startup-id krunner
 # change focused window
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -214,7 +218,7 @@ for_window [class="krunner"] floating enable; move position center; border none
 for_window [class="Kmix"] floating enable; border none
 for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none
-for_window [class="(?i)*nextcloud*"] floating disable
+#for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px, no_focus
 
 ################################### OTHER WINDOW BEHAVIOR ########################
@@ -225,10 +229,7 @@ for_window [title="Connections"] floating enable;
 ################################### status bar ##########################################
 #########################################################################################
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
 bar {
-        #font pango:DejaVu Sans Mono, FontAwesome 12
         font pango:Fira Code, FontAwesome 12
         position top
         status_command i3status-rs ~/.config/i3/status.toml

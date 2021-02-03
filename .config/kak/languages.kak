@@ -1,5 +1,8 @@
 ##################### Language support #########################
 ################################################################
+hook global WinSetOption filetype=plain %{
+    modeline-parse
+}
 #Rust
 hook global WinSetOption filetype=rust %{
     auto-pairs-enable

@@ -169,3 +169,4 @@ man() {
                             
 
 # For a full list of active aliases, run `alias`.
+if [ -e /home/daedalus/.nix-profile/etc/profile.d/nix.sh ]; then . /home/daedalus/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
