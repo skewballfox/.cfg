@@ -21,7 +21,7 @@ else
     end
     set -xg GPG_TTY (tty)
     gpg-connect-agent updatestartuptty /bye > /dev/null
-    end
+end
 
 
 # Aliases
@@ -32,11 +32,7 @@ alias ls "ls -1lih --color=auto"
 
 alias grep "grep --color=auto"
 
-#alias ranger "ranger-cd" 
-
-# Prompt and aesthetics
-
+#functions silver
 function fish_prompt
-    powerline-rs  $status --cwd-max-dir-size 10 --shell bare
+    starship init fish | source
 end
-
