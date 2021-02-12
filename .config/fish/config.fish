@@ -10,7 +10,8 @@ if status --is-login
     set -x EDITOR kak
     set -x TERM alacritty
     set -x TERMCMD alacritty
-    #if command -v i3-config-wizard
+    #Check if running sway and set environment variables
+    set -qx SWAYSOCK; QT_QPA_PLATFORM=qt5ct
 #per instance
 else
     
