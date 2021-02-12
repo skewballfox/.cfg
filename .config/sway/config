@@ -43,17 +43,13 @@ client.background       #ffffff
 #########################################################################################
 
 exec systemctl --user import-environment PATH
-#Add the commented out options to systemd --user service
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-#exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
 output "*" bg $(find $HOME/Media/Images/wallpapers/. -type f| shuf -n1) fill
 #exec --no-startup-id nm-applet &
 #TODO: change to use gammastep
 #exec --no-startup-id redshift-gtk &
-#exec --no-startup-id dunst &
 exec --no-startup-id thunar --daemon &
 # exec --no-startup-id blueman-applet &
-#exec --no-startup-id udiskie --no-automount --tray --use-udisks2 &
 # exec --no-startup-id aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
 #exec --no-startup-id xautolock -time 5 -corner 0-00 -detectsleep -locker i3lock-fancy --pixelate -- scrot -z
 # exec --no-startup-id conky -c ~/path/to/.conkyrc
@@ -64,7 +60,6 @@ exec --no-startup-id thunar --daemon &
 
 # Application Launchers
 bindsym $mod+j exec --no-startup-id chromium
-#bindsym $mod+k exec $HOME/.config/i3/workspaces/coding_workspace.zsh 
 #bindsym $mod+Shift+l exec i3lock-fancy
 #bindsym $mod+p exec passmenu
 
