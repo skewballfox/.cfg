@@ -11,7 +11,7 @@ if status --is-login
     set -x TERM alacritty
     set -x TERMCMD alacritty
     #Check if running sway and set environment variables
-    set -qx SWAYSOCK; QT_QPA_PLATFORM=qt5ct
+    set -qx SWAYSOCK; set -x QT_QPA_PLATFORM qt5ct
 #per instance
 else
     
