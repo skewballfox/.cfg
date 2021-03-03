@@ -8,7 +8,7 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below
 
-font pango:Droid Sans Mono 8
+font pango:Droid Sans Mono 8; FontAwesom 12
 
 # disable windows titlebars, while preserving border
 for_window [class=".*"] border pixel 8
@@ -45,7 +45,7 @@ client.background       #ffffff
 exec systemctl --user import-environment PATH
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 output "*" bg $(find $HOME/Media/Images/wallpapers/. -type f| shuf -n1) fill
-#exec --no-startup-id nm-applet &
+exec --no-startup-id nm-applet --indicator &
 #TODO: change to use gammastep
 #exec --no-startup-id redshift-gtk &
 exec --no-startup-id thunar --daemon &
@@ -223,7 +223,7 @@ for_window [title="Connections"] floating enable;
 bar {
         font pango:Fira Code, FontAwesome 12
         position bottom
-        status_command i3status-rs ~/.config/i3/status.toml
+        status_command i3status-rs ~/.config/sway/status.toml
         mode dock
     colors {
         separator #666666
