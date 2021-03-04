@@ -10,3 +10,4 @@ PATH="$HOME/.local/bin:$PATH"
 export PATH
 
 export ARGOS_HOME=/home/daedalus/Workspace/Group_Projects/Argos
+source "$HOME/.cargo/env"

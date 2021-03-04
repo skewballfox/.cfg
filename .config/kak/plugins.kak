@@ -1,6 +1,11 @@
-
-source "%val{config}/plugins/plug.kak/rc/plug.kak"
-
+#automatically install plug.kak if not available
+source "%val{config}/plugins/plug.kak/rc/plug.kak"te-commands %sh{
+        plugins="$HOME/.config/kak/plugins"
+            mkdir -p $plugins
+                [ ! -e "$plugins/plug.kak" ] && \
+        git clone -q https://github.com/andreyorst/plug.kak "$plugins/plug.kak"
+    printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
+}
 plug "andreyorst/plug.kak" noload
 
 #dependency of auto-pairs and snippets
@@ -31,19 +36,29 @@ plug "andreyorst/kaktree" config %{
 
 #plug "occivink/kakoune-gdb"
 
-
+#for clipboard integration
 plug "lePerdu/kakboard" %{
         hook global WinCreate .* %{ kakboard-enable }
 }
 
-plug "ul/kak-lsp" do %{
-    cargo build --release --locked
-    cargo install --force --path .
-} config %{
+#for language server features
+plug "ul/kak-lsp" config %{
       # uncomment to enable debugging
       eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
       set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 
+      #enable snippet support
+      snippet_support=true
+      #maps <c-n> to next placeholder if there is one, otherwise executes c-n as normal
+      def -hidden insert-c-n %{
+           try %{
+              lsp-snippets-select-next-placeholders
+              exec '<a-;>d'
+           } catch %{
+              exec -with-hooks '<c-n>'
+           }
+      }
+      map global insert <c-n> "<a-;>: insert-c-n<ret>"
 
       set global lsp_diagnostic_line_error_sign '!'
       set global lsp_diagnostic_line_warning_sign '?'
@@ -84,15 +99,18 @@ plug "ul/kak-lsp" do %{
       }
       hook global KakEnd .* lsp-exit
 }
+
+#JAVA 15 SUPPORT!
+plug "KJ_DUNCAN/kakoune-java.kak" domain "bitbucket.org"
 #plug 'delapouite/kakoune-i3' %{
 #      # Suggested mapping
 #       map global user 3 ': enter-user-mode i3<ret>' -docstring 'i3…'
 #
 
-plug "alexherbo2/snippets.kak" %{
+#plug "alexherbo2/snippets.kak" %{
     # Modules
-    require-module snippets-crystal
+#    require-module snippets-crystal
 
     # Options
-    set-option global snippets_scope global
-}
+#    set-option global snippets_scope global
+#}
