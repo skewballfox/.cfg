@@ -8,21 +8,20 @@ if status --is-login
     set -x MANPATH "$MANPATH:$NPM_PACKAGES/share/man"
     set -x LD_LIBRARY_PATH /usr/lib64/openmpi
     set -x EDITOR kak
-    set -x TERM alacritty
-    set -x TERMCMD alacritty
+    set -x TERM kitty
+    set -x TERMCMD kitty
     #Check if running sway and set environment variables
     set -qx SWAYSOCK; set -x QT_QPA_PLATFORM qt5ct
 #per instance
-else
-    
-    # SSH with GPG
-    set -e SSH_AGENT_PID
-    if not set -q gnupg_SSH_AUTH_SOCK_by or test $gnupg_SSH_AUTH_SOCK_by -ne $fish_pid
-        set -xg SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-    end
-    set -xg GPG_TTY (tty)
-    gpg-connect-agent updatestartuptty /bye > /dev/null
 end
+    
+# SSH with GPG
+set -e SSH_AGENT_PID
+if not set -q gnupg_SSH_AUTH_SOCK_by or test $gnupg_SSH_AUTH_SOCK_by -ne $fish_pid
+    set -xg SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+end
+set -xg GPG_TTY (tty)
+gpg-connect-agent updatestartuptty /bye > /dev/null
 
 
 # Aliases

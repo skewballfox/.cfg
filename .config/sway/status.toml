@@ -17,6 +17,8 @@ interval = 1
 format = "{1m}"
 
 [[block]]
+device="BAT1"
 block = "battery"
+#hide_missing=true
 interval = 10
 format = "{percentage}% {time}"
