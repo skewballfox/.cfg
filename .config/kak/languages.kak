@@ -19,7 +19,7 @@ hook global WinSetOption filetype=markdown %{
 hook global WinSetOption filetype=python %{
     set window autowrap_column 80
     auto-pairs-enable
-    #jedi-enable-autocomplete
+    set-option window formatcmd 'black -q -'
     #hook window BufWritePre .* %{
     #    evaluate-commands %sh{
     #        bandit -r -

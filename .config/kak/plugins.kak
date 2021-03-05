@@ -1,5 +1,5 @@
 #automatically install plug.kak if not available
-source "%val{config}/plugins/plug.kak/rc/plug.kak"te-commands %sh{
+source "%val{config}/plugins/plug.kak/rc/plug.kak" evaluate-commands %sh{
         plugins="$HOME/.config/kak/plugins"
             mkdir -p $plugins
                 [ ! -e "$plugins/plug.kak" ] && \
@@ -11,7 +11,18 @@ plug "andreyorst/plug.kak" noload
 #dependency of auto-pairs and snippets
 plug "alexherbo2/prelude.kak"
 
-plug "alexherbo2/auto-pairs.kak" config %{
+plug "alexherbo2/auto-pairs.kak" evaluate-commands %sh{
+    current_directory=$PWD
+    if [ ! -x "$(command -v kcr)" ]; then
+        current_directory=$PWD
+        mkdir $HOME/.config/kak/build && cd $HOME/.config/build
+        git clone -q https://github.com/alexherbo2/kakoune.cr
+        cd kakoune.cr && make install
+        cd $current_directory
+    fi
+
+    kcr init kakoune
+} config %{
     hook global WinSetOption filetype=markdown %{
         set-option -add buffer auto_pairs_surround $$$ $$$ $ $ _ _ * *
     }
