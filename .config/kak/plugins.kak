@@ -15,7 +15,7 @@ plug "alexherbo2/auto-pairs.kak" evaluate-commands %sh{
     current_directory=$PWD
     if [ ! -x "$(command -v kcr)" ]; then
         current_directory=$PWD
-        mkdir $HOME/.config/kak/build && cd $HOME/.config/build
+        mkdir $HOME/.config/kak/build && cd $HOME/.config/kak/build
         git clone -q https://github.com/alexherbo2/kakoune.cr
         cd kakoune.cr && make install
         cd $current_directory
