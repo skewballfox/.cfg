@@ -12,13 +12,12 @@ plug "andreyorst/plug.kak" noload
 plug "alexherbo2/prelude.kak"
 
 plug "alexherbo2/auto-pairs.kak" evaluate-commands %sh{
-    current_directory=$PWD
     if [ ! -x "$(command -v kcr)" ]; then
-        current_directory=$PWD
-        mkdir $HOME/.config/kak/build && cd $HOME/.config/kak/build
+        current_directory="$PWD"
+        cd "$HOME/.config/kak/"
         git clone -q https://github.com/alexherbo2/kakoune.cr
         cd kakoune.cr && make install
-        cd $current_directory
+        cd "$current_directory"
     fi
 
     kcr init kakoune
@@ -54,8 +53,10 @@ plug "lePerdu/kakboard" %{
 
 #for language server features
 plug "ul/kak-lsp" config %{
+
       # uncomment to enable debugging
-      eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
+      #eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
+
       set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 
       #enable snippet support

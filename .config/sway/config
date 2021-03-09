@@ -46,12 +46,11 @@ exec systemctl --user import-environment PATH
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 output "*" bg $(find $HOME/Media/Images/wallpapers/. -type f| shuf -n1) fill
 exec --no-startup-id nm-applet --indicator &
-#TODO: change to use gammastep
-#exec --no-startup-id redshift-gtk &
+exec --no-startup-id gammastep &
 exec --no-startup-id thunar --daemon &
+exec --no-startup-id nextcloud &
 # exec --no-startup-id blueman-applet &
 # exec --no-startup-id aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
-# exec --no-startup-id conky -c ~/path/to/.conkyrc
 
 
 ############################# Keybindings #################################################
