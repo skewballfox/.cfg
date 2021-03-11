@@ -7,6 +7,7 @@ hook global WinSetOption filetype=plain %{
 }
 #Rust
 hook global WinSetOption filetype=rust %{
+    require-module auto-pairs
     auto-pairs-enable
     set-option window lsp_server_configuration rust.clippy_preference="on"
     set window formatcmd 'rustfmt'
@@ -26,15 +27,14 @@ hook global WinSetOption filetype=markdown %{
 #python
 hook global WinSetOption filetype=python %{
     set window autowrap_column 80
+    require-module auto-pairs
     auto-pairs-enable
-    set-option window lsp_server_initialization_options %sh{
-        echo python.interpreter.properties.InterpreterPath=\"$(which python)\"
-        echo python.interpreter.properties.Version=\"$(python -V | sed 's/.* //')\"
-    }
-    set-option window lsp_server_configuration settings.python.analysis.logLevel = "Information"
-    settings.python.linting.pylintEnabled = true
-    set-option global lsp_server_initialization_options python.interpreter.properties.UseDefaultDatabase = true
-    python.interpreter.properties.Version=\"$(
+    set-option window lsp_server_initialization_options %sh{echo python.interpreter.properties.InterpreterPath=\"$(which python)\"}
+    set-option window lsp_server_initialization_options %sh{echo python.interpreter.properties.Version=\"$(python -V | sed 's/.* //')\"}
+    set-option window lsp_server_configuration settings.python.analysis.logLevel="Information"
+    #settings.python.linting.pylintEnabled=true
+    set-option global lsp_server_initialization_options python.interpreter.properties.UseDefaultDatabase=true
+    
     set-option window formatcmd 'black -q -'
     hook window BufWritePre .* lsp-formatting-sync
     #hook window BufWritePre .* %{
