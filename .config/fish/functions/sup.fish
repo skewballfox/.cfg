@@ -12,8 +12,6 @@ function sup
 
     echo -e "\nupgrading pip user installs\n"
     pip install --user (pip list --user --outdated | tail -n +3 | awk '{ print $1 }' ) --upgrade
-    # until I fix the above
-    pip install --user --upgrade Python-language-server
 
     echo -e "\nupgrading npm global installs\n"
     npm update -g
