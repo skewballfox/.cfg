@@ -3,16 +3,16 @@ source "/usr/share/kak-lsp/rc/lsp.kak"
 
 # uncomment to enable debugging
 #eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
-#snippet_support = true
+
 #maps <c-n> to next placeholder if there is one, otherwise executes c-n as normal
-#def -hidden insert-c-n %{
-#    try %{
-#        lsp-snippets-select-next-placeholders
-#        exec '<a-;>d'
-#    } catch %{
-#        exec -with-hooks '<c-n>'
-#    }
-#}
+def -hidden insert-c-n %{
+    try %{
+        lsp-snippets-select-next-placeholders
+        exec '<a-;>d'
+    } catch %{
+        exec -with-hooks '<c-n>'
+    }
+}
 
 map global insert <c-n> "<a-;>: insert-c-n<ret>"
 
@@ -94,8 +94,6 @@ plug "lePerdu/kakboard" %{
 
 
 
-      hook global KakEnd .* lsp-exit
-}
 
 #JAVA 15 SUPPORT!
 plug "KJ_DUNCAN/kakoune-java.kak" domain "bitbucket.org"
