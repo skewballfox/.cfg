@@ -32,9 +32,7 @@ alias ls "ls -1lih --color=auto"
 
 alias grep "grep --color=auto"
 
-#alias ssh "kitty +kitten ssh"
-
-#functions silver
+# using starship as prompt
 function fish_prompt
     starship init fish | source
 end
