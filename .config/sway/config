@@ -78,7 +78,7 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec sway-cwd-term.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill

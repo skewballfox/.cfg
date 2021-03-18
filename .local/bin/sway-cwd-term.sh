@@ -3,22 +3,16 @@
 # Open a new terminal in the current working directory of a focused terminal
 terminal="kitty"
 
-# Get the process id of the currently selected window
-pid=$(swaymsg -t get_tree | jq '.. | select(.type?) | select(.type=="con") | select(.focused==true).pid')
-# Get the name of this process
-pname=$(ps -p ${pid} -o comm= | sed 's/-$//')
+cwd="$( swaymsg -t get_tree |
+  jq '.. | (.nodes? // empty)[] | select(.focused == true).pid? // empty' |
+  xargs pstree -p | rg '<tmux>|<fish>|<bash>|<zsh>|<sh>' |
+  rg -o '[0-9]*' | xargs pwdx 2> /dev/null | cut -f2- -d' ' |
+  sort | tail -n 1 | tr -d '\n' )"
 
-# If the process name matches the $terminal, obtain the CWD and echo the result.
-if [[ $pname == $terminal ]]
-then
-    # Get parent process id
-    ppid=$(pgrep --newest --parent $pid )
-     
-    # Get the current working directory
-    workdir=$(readlink /proc/${ppid}/cwd)
-    notify-send -t 2000 "Terminal in $workdir"
-    $terminal -d $workdir
+if [ -d "$cwd" ]; then
+   $terminal -d "$cwd" &
+   disown
 else
-    #notify-send -t 2000 -- "Failed to obtain current directory from $pname"
-    $terminal
+   $terminal &
+   disown
 fi
