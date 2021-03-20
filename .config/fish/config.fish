@@ -1,28 +1,30 @@
-#login
+# on login
 if status --is-login
+    echo "I logged in" >> login.txt
     # Environment Variables
-    set -x NPM_PACKAGES "$HOME/.local/npm_packages"
-    set -x npm_config_prefix $NPM_PACKAGES/lib/node_modules
+    #set -x NPM_PACKAGES "$HOME/.local/npm_packages"
+    #set -x npm_config_prefix $NPM_PACKAGES/lib/node_modules
     #still trying to figure out how to handle env variales that are arrays
-    set -x NODE_PATH $NPM_PACKAGES/lib/node_modules{$NODE_PATH}
-    set -x MANPATH "$MANPaTH:$NPM_PACKAGES/share/man"
-    set -x LD_LIBRARY_PATH /usr/lib64/openmpi
-    set -x EDITOR kak
-    set -x TERM kitty
-    set -x TERMCMD kitty
+    #set -x NODE_PATH $NPM_PACKAGES/lib/node_modules{$NODE_PATH}
+    #set -x MANPATH "$MANPATH:$NPM_PACKAGES/share/man"
+    #set -x LD_LIBRARY_PATH /usr/lib64/openmpi
+    set -gx EDITOR kak
+    set -gx TERM kitty
+    set -gx TERMCMD kitty
     #Check if running sway and set environment variables
-    set -qx SWAYSOCK; set -x QT_QPA_PLATFORM wayland; set -x QT_QPA_PLATFORMTHEME qt5ct
-#per instance
+    set -qx SWAYSOCK; and set -gx QT_QPA_PLATFORM wayland; set -gx QT_QPA_PLATFORMTHEME qt5ct
 end
-    
-# SSH with GPG
-set -e SSH_AGENT_PID
-if not set -q gnupg_SSH_AUTH_SOCK_by or test $gnupg_SSH_AUTH_SOCK_by -ne $fish_pid
-    set -xg SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
-end
-set -xg GPG_TTY (tty)
-gpg-connect-agent updatestartuptty /bye > /dev/null
 
+# per instance
+if status is-interactive
+    # SSH with GPG
+    set -e SSH_AGENT_PID
+    if not set -q gnupg_SSH_AUTH_SOCK_by or test $gnupg_SSH_AUTH_SOCK_by -ne $fish_pid
+        set -xg SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+    end
+    set -xg GPG_TTY (tty)
+    gpg-connect-agent updatestartuptty /bye > /dev/null
+end
 
 # Aliases
 

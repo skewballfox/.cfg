@@ -58,7 +58,7 @@ exec --no-startup-id nextcloud &
 ###########################################################################################
 
 # Application Launchers
-bindsym $mod+j exec --no-startup-id chromium
+bindsym $mod+b exec --no-startup-id chromium-freeworld --enable-features=UseOzonePlatform --ozone-platform=wayland
 #bindsym $mod+Shift+l exec i3lock-fancy
 #bindsym $mod+p exec passmenu
 
@@ -78,7 +78,7 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec sway-cwd-term.sh
+bindsym $mod+Return exec ~/.local/bin/sway-cwd-term.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
