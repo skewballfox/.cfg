@@ -43,7 +43,8 @@ client.background       #ffffff
 #########################################################################################
 
 exec systemctl --user import-environment PATH
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1 &
+
 output "*" bg $(find $HOME/Media/Images/wallpapers/. -type f| shuf -n1) fill
 exec --no-startup-id mako &
 exec --no-startup-id nm-applet --indicator &
