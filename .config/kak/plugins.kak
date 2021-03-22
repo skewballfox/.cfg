@@ -54,11 +54,13 @@ plug "alexherbo2/prelude.kak"
 evaluate-commands %sh{
 
     if [ ! -x "$(command -v kcr)" ]; then
-        current_directory="$PWD"
-        cd "$HOME/.config/kak/"
-        git clone -q https://github.com/alexherbo2/kakoune.cr
-        cd kakoune.cr && make install
-        cd "$current_directory"
+        temp=`mktemp`
+        wget  "https://github.com/alexherbo2/kakoune.cr/releases/download/nightly/kakoune.cr-nightly-x86_64-unknown-linux-musl.zip" -O $temp &&\
+        unzip -d $HOME/.local/bin $temp &&\
+        date -u +"%Y-%m-%dT%H:%M:%SZ" >$HOME/.config/kak/.kcr-install-date &&\
+        rm $temp
+    #else; then
+        
     fi
     kcr init kakoune
 }

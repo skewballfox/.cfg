@@ -1,4 +1,4 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
 # Open a new terminal in the current working directory of a focused terminal
 terminal="kitty"
