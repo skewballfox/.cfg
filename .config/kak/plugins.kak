@@ -38,14 +38,13 @@ hook global KakEnd .* lsp-exit
 
 
 # automatically install plug.kak if not available
-source "%val{config}/plugins/plug.kak/rc/plug.kak" evaluate-commands %sh{
+evaluate-commands %sh{
         plugins="$HOME/.config/kak/plugins"
-            mkdir -p $plugins
-                [ ! -e "$plugins/plug.kak" ] && \
-        git clone -q https://github.com/andreyorst/plug.kak "$plugins/plug.kak"
+        mkdir -p $plugins
+        [ ! -e "$plugins/plug.kak" ] && \
+            git clone -q https://github.com/andreyorst/plug.kak "$plugins/plug.kak"
     printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
 }
-
 plug "andreyorst/plug.kak" noload
 
 #dependency of auto-pairs and snippets
@@ -56,11 +55,9 @@ evaluate-commands %sh{
     if [ ! -x "$(command -v kcr)" ]; then
         temp=`mktemp`
         wget  "https://github.com/alexherbo2/kakoune.cr/releases/download/nightly/kakoune.cr-nightly-x86_64-unknown-linux-musl.zip" -O $temp &&\
-        unzip -d $HOME/.local/bin $temp &&\
+        unzip -d $HOME/.local/ $temp &&\
         date -u +"%Y-%m-%dT%H:%M:%SZ" >$HOME/.config/kak/.kcr-install-date &&\
-        rm $temp
-    #else; then
-        
+        rm $temp  
     fi
     kcr init kakoune
 }
