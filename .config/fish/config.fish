@@ -1,6 +1,6 @@
 # on login
 if status --is-login
-    echo "I logged in" >> login.txt
+    echo "I logged in" > login.txt
     # Environment Variables
     #set -x NPM_PACKAGES "$HOME/.local/npm_packages"
     #set -x npm_config_prefix $NPM_PACKAGES/lib/node_modules
@@ -9,10 +9,14 @@ if status --is-login
     #set -x MANPATH "$MANPATH:$NPM_PACKAGES/share/man"
     #set -x LD_LIBRARY_PATH /usr/lib64/openmpi
     set -gx EDITOR kak
+    echo $EDITOR >> login.txt
     set -gx TERM kitty
+    echo $TERM >> login.txt
     set -gx TERMCMD kitty
+    echo $TERMCMD >> login.txt
     #Check if running sway and set environment variables
     set -qx SWAYSOCK; and set -gx QT_QPA_PLATFORM wayland; set -gx QT_QPA_PLATFORMTHEME qt5ct
+    echo $QT_QPA_PLATFORM >> login.txt
 end
 
 # per instance

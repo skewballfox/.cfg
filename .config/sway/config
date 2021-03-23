@@ -59,7 +59,7 @@ exec --no-startup-id nextcloud &
 ###########################################################################################
 
 # Application Launchers
-bindsym $mod+b exec --no-startup-id chromium-freeworld --enable-features=UseOzonePlatform --ozone-platform=wayland
+bindsym $mod+b exec --no-startup-id google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland
 #bindsym $mod+Shift+l exec i3lock-fancy
 #bindsym $mod+p exec passmenu
 
