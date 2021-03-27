@@ -5,7 +5,7 @@ terminal="kitty"
 
 cwd="$( swaymsg -t get_tree |
   jq '.. | (.nodes? // empty)[] | select(.focused == true).pid? // empty' |
-  xargs pstree -p | rg '<tmux>|<fish>|<bash>|<zsh>|<sh>' |
+  xargs pstree -p | rg 'tmux|fish|bash|zsh|sh' |
   rg -o '[0-9]*' | xargs pwdx 2> /dev/null | cut -f2- -d' ' |
   sort | tail -n 1 | tr -d '\n' )"
 

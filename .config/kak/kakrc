@@ -9,7 +9,7 @@ evaluate-commands %sh{
          try %{
             source %{$HOME/.config/kak/$file}
          } catch %{
-            echo yeet $file 
+            echo error while loading $file 
             
             echo -debug %val{error}
         }

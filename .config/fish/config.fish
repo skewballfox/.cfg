@@ -28,6 +28,7 @@ if status is-interactive
     end
     set -xg GPG_TTY (tty)
     gpg-connect-agent updatestartuptty /bye > /dev/null
+    source ~/.asdf/asdf.fish
 end
 
 # Aliases

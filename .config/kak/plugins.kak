@@ -1,5 +1,6 @@
 #for language server features
 source "/usr/share/kak-lsp/rc/lsp.kak"
+#eval %sh{kak-lsp --kakoune -s $kak_session}
 
 # uncomment to enable debugging
 #eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
