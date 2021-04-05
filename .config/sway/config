@@ -63,8 +63,8 @@ bindsym $mod+b exec --no-startup-id google-chrome --enable-features=UseOzonePlat
 #bindsym $mod+Shift+l exec i3lock-fancy
 #bindsym $mod+p exec passmenu
 
-#bindsym Print exec "scrot -e 'mv $f ~/Media/Images/Screenshots/'"
-#bindsym $mod+Print exec "scrot -ue 'mv $f ~/Media/Images/Screenshots'"
+bindsym Print exec "grim  $HOME/Nextcloud/Images/Screenshots/$(hostname)-$(date +%d-%m-%Y_%H-%M-%S).png"
+bindsym $mod+Print exec "slurp| grim -g - - | wl-copy"
 
 # Media volume controls
 bindsym XF86AudioMute exec amixer sset 'Master' toggle
@@ -86,7 +86,7 @@ bindsym $mod+Shift+q kill
 
 
 # start wofi (a program launcher)
-bindsym $mod+d exec --no-startup-id wofi --show=drun --gtk-dark --allow-images --alow-markup
+bindsym $mod+d exec  wofi --gtk-dark --allow-images --allow-markup --show drun
 
 #bindsym $mod+d exec --no-startup-id krunner
 # change focused window

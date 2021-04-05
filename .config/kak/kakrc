@@ -27,6 +27,10 @@ set global indentwidth 4
 # replace tab with spaces
 hook global InsertChar \t %{ exec -draft -itersel h@ }
 
+# keybinding to comment line/block
+map global normal '#' :comment-line<ret> -docstring 'comment line'
+map global normal '<a-#>' :comment-block<ret> -docstring 'comment block'
+
 
 ####################### Autocompletion ##########################
 #################################################################
