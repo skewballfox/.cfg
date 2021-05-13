@@ -1,5 +1,6 @@
 ################### Universal Vars ########################
-
+#include local desktop files in data dir
+export XDG_DATA_DIRS="$HOME/.local/share/applications:${XDG_DATA_DIRS}"
 if [ -x "$(which npm)" ]
 then  
     #set location for npm packages

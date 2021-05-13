@@ -43,23 +43,23 @@ client.background       #ffffff
 #########################################################################################
 
 exec systemctl --user import-environment PATH
-exec --no-startup-id /usr/libexec/polkit-gnome-authentication-agent-1 &
+exec  /usr/libexec/polkit-gnome-authentication-agent-1 &
 
 output "*" bg $(find $HOME/Media/Images/wallpapers/. -type f| shuf -n1) fill
-exec --no-startup-id mako &
-exec --no-startup-id nm-applet --indicator &
-exec --no-startup-id gammastep &
-exec --no-startup-id thunar --daemon &
-exec --no-startup-id nextcloud &
-# exec --no-startup-id blueman-applet &
-# exec --no-startup-id aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
+exec  mako &
+exec  nm-applet --indicator &
+exec  gammastep &
+exec  thunar --daemon &
+exec  nextcloud &
+# exec  blueman-applet &
+# exec  aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
 
 
 ############################# Keybindings #################################################
 ###########################################################################################
 
 # Application Launchers
-bindsym $mod+b exec --no-startup-id google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland
+bindsym $mod+b exec google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland
 #bindsym $mod+Shift+l exec i3lock-fancy
 #bindsym $mod+p exec passmenu
 
@@ -88,7 +88,7 @@ bindsym $mod+Shift+q kill
 # start wofi (a program launcher)
 bindsym $mod+d exec  wofi --gtk-dark --allow-images --allow-markup --show drun
 
-#bindsym $mod+d exec --no-startup-id krunner
+#bindsym $mod+d exec  krunner
 # change focused window
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -193,7 +193,7 @@ bindsym $mod+r mode "resize"
 
 ################################### KDE WINDOW BEHAVIOR ################################
 ########################################################################################
-exec --no-startup-id wmctrl -c Plasma
+exec  wmctrl -c Plasma
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
