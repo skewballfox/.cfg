@@ -35,10 +35,11 @@ export TERM=kitty
 export TERMCMD=kitty
 
 #set default editor
-export $EDITOR kak
+export EDITOR=kak
 
-if [ -z ${SWAYSOCK+x} ]
+if [ "$XDG_SESSION_DESKTOP" = "sway" ]
 then
+    export _JAVA_AWT_WM_NONREPARENTING=1
     export QT_QPA_PLATFORM=wayland
     export QT_QPA_PLATFORMTHEME=qt5ct
     export MOZ_ENABLE_WAYLAND=1
@@ -47,6 +48,7 @@ fi
 # load openmpi lib
 if [ -d /usr/lib64/openmpi ]
 then 
-
+    export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/openmpi"
+fi
 ######################## HOST SPECIFIC VARS #####################
 #export ARGOS_HOME=/home/daedalus/Workspace/Group_Projects/Argos
