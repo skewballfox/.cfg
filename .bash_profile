@@ -47,7 +47,7 @@ fi
 #export ARGOS_HOME=/home/daedalus/Workspace/Group_Projects/Argos
 
 
-if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
     export QT_QPA_PLATFORM=wayland
     export QT_QPA_PLATFORMTHEME=qt5ct
     export MOZ_ENABLE_WAYLAND=1
