@@ -48,9 +48,6 @@ evaluate-commands %sh{
 }
 plug "andreyorst/plug.kak" noload
 
-#dependency of auto-pairs and snippets
-plug "alexherbo2/prelude.kak"
-
 evaluate-commands %sh{
 
     if [ ! -x "$(command -v kcr)" ]; then
@@ -69,9 +66,6 @@ plug "alexherbo2/auto-pairs.kak" config %{
 }
 
 plug "alexherbo2/surround.kak"
-
-#dependency of snippets
-plug "alexherbo2/phantom.kak"
 
 #plug "aparkerdavid/kakoune-rainbow"
 

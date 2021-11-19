@@ -1,9 +1,30 @@
-############################# i3 config file (v4) ########################################
+############################# sway config file ###########################################
 ##########################################################################################
 
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
+############################ Environment Variables #######################################
+##########################################################################################
 set $mod Mod4
+set $sway_bin ~/.config/sway/bin
+set $browser google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland 
+set $terminal $sway_bin/sway-cwd-term.sh
+set $launcher wofi --gtk-dark --allow-images --allow-markup --show drun
+#TODO
+#set $locker $sway_bin/locker.sh
+set $IDE code --enable-features=UseOzonePlatform --ozone-platform=wayland
+
+
+# Define names for default workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below
@@ -25,16 +46,36 @@ focus_follows_mouse yes
 # User Mouse+$mod to drag floating windows to a position
 floating_modifier $mod
 
+
+set $cl_high #0088cc
+set $cl_hchd #285577
+set $cl_hind #d9d8d8
+set $cl_atxt #ffffff
+
+set $cl_back #333333
+set $cl_bchd #222222
+set $cl_bind #292d2e
+set $cl_btxt $cl_atxt
+
+set $cl_utxt #888888
+set $cl_usep #5f676a 
+#used
+set $cl_urgf #900000
+set $cl_urgb #2f343a
+
+
+
+
 ################################ color_scheme ############################################
 ##########################################################################################
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-client.background       #ffffff
+client.focused          $cl_high $cl_hchd $cl_atxt  $cl_high   $cl_hchd
+client.focused_inactive $cl_back $cl_usep $cl_btxt $cl_bind   $cl_usep
+client.unfocused        $cl_back $cl_bchd $cl_utxt $cl_bind   $cl_bchd
+client.urgent           $cl_urgb $cl_urgf $cl_atxt $cl_urgf   $cl_urgf
+#client.placeholder      #000000 #0c0c0c $cl_btxt #000000   #0c0c0c
+client.background       $cl_back
 
 # set keyboard layout
 #exec_always "setxkbmap -model pc104 -layout us,gb -variant ,, -option grp:alt_shift_toggle"
@@ -44,6 +85,7 @@ client.background       #ffffff
 
 exec systemctl --user import-environment PATH
 exec  /usr/libexec/polkit-gnome-authentication-agent-1 &
+exec gnome-keyring-daemon --start --components=secrets
 
 output "*" bg $(find $HOME/Media/Images/wallpapers/. -type f| shuf -n1) fill
 exec  mako &
@@ -59,9 +101,10 @@ exec  nextcloud &
 ###########################################################################################
 
 # Application Launchers
-bindsym $mod+b exec google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland
-#bindsym $mod+Shift+l exec i3lock-fancy
-#bindsym $mod+p exec passmenu
+bindsym $mod+b exec $browser
+bindsym $mod+i exec $IDE
+#bindsym $mod+Shift+l exec $locker
+
 
 bindsym Print exec "grim  $HOME/Nextcloud/Images/Screenshots/$(hostname)-$(date +%d-%m-%Y_%H-%M-%S).png"
 bindsym $mod+Print exec "slurp| grim -g - - | wl-copy"
@@ -79,16 +122,15 @@ bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec ~/.local/bin/sway-cwd-term.sh
+bindsym $mod+Return exec $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 
 # start wofi (a program launcher)
-bindsym $mod+d exec  wofi --gtk-dark --allow-images --allow-markup --show drun
+bindsym $mod+d exec $launcher
 
-#bindsym $mod+d exec  krunner
 # change focused window
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -127,18 +169,7 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -226,12 +257,12 @@ bar {
         status_command i3status-rs ~/.config/sway/status.toml
         mode dock
     colors {
-        separator #666666
-        background #222222
-        statusline #dddddd
-        focused_workspace #0088CC #0088CC #ffffff
-        active_workspace #333333 #333333 #ffffff
-        inactive_workspace #333333 #333333 #888888
-        urgent_workspace #2f343a #900000 #ffffff
+        separator $cl_usep
+        background $cl_bchd
+        statusline $cl_atxt
+        focused_workspace $cl_high $cl_high $cl_atxt
+        active_workspace $cl_back $cl_back $cl_btxt
+        inactive_workspace $cl_back $cl_back $cl_utxt
+        urgent_workspace $cl_urgb $cl_urgf $cl_atxt
     }
 }

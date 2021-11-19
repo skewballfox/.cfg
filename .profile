@@ -45,10 +45,9 @@ then
     export MOZ_ENABLE_WAYLAND=1
 fi
 
-# load openmpi lib
-if [ -d /usr/lib64/openmpi ]
-then 
-    export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64/openmpi"
-fi
+# set load library path correctly
+ 
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib64:/usr/local/lib:usr/local/lib64"
+
 ######################## HOST SPECIFIC VARS #####################
 #export ARGOS_HOME=/home/daedalus/Workspace/Group_Projects/Argos
