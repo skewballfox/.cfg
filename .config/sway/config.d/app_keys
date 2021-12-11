@@ -1,0 +1,10 @@
+# start wofi (a program launcher)
+bindsym $mod+d exec $launcher
+
+# Application Launchers
+bindsym $mod+b exec $browser
+bindsym $mod+i exec $IDE
+
+
+# start a terminal
+bindsym $mod+Return exec $terminal

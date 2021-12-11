@@ -61,18 +61,21 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
 
     #so thunderbird-wayland will actually use wayland
     export MOZ_ENABLE_WAYLAND=1
+    #think it's used for obs studio
+    export MOZ_WEBRENDER=1
 
     export _JAVA_AWT_WM_NONREPARENTING=1
     #export WLR_DRM_NO_MODIFIERS=1
 
-    export XDG_CURRENT_DESKTOP=sway
-    export CURRENT_DESKTOP=sway
-
+    #necessary for tumbler apparently
+    export XDG_CACHE_HOME=$HOME/.cache
+    
     #stuff to try to get gnome-pinentry and seahorse
     #to properly work
     export XDG_CURRENT_DESKTOP=sway
     export XDG_SESSION_DESKTOP=sway
     export XDG_SESSION_TYPE=wayland
+    export CURRENT_DESKTOP=sway
 
     if command -v systemctl >/dev/null 2>&1; then
         systemctl --user import-environment XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE

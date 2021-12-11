@@ -1,0 +1,2 @@
+bindsym Print exec "grim  $HOME/Nextcloud/Images/Screenshots/$(hostname)-$(date +%d-%m-%Y_%H-%M-%S).png"
+bindsym $mod+Print exec "slurp| grim -g - - | wl-copy"

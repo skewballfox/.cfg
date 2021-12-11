@@ -8,7 +8,7 @@ hook global WinSetOption filetype=plain %{
 #Rust
 hook global WinSetOption filetype=rust %{
     require-module auto-pairs
-    auto-pairs-enable
+    enable-auto-pairs
     set-option window lsp_server_configuration rust.clippy_preference="on"
     set window formatcmd 'rustfmt'
     hook window BufWritePre .* %{
@@ -28,7 +28,7 @@ hook global WinSetOption filetype=markdown %{
 hook global WinSetOption filetype=python %{
     set window autowrap_column 80
     require-module auto-pairs
-    auto-pairs-enable
+    enable-auto-pairs
     set-option window lsp_server_initialization_options %sh{echo python.interpreter.properties.InterpreterPath=\"$(which python)\"}
     set-option window lsp_server_initialization_options %sh{echo python.interpreter.properties.Version=\"$(python -V | sed 's/.* //')\"}
     set-option window lsp_server_configuration settings.python.analysis.logLevel="Information"
@@ -47,7 +47,7 @@ hook global WinSetOption filetype=python %{
 
 #C++
 hook global WinSetOption filetype=(c|cpp) %{
-    auto-pairs-enable
+    enable-auto-pairs
     set-option window formatcmd 'clang-format'
     clang-enable-autocomplete
     clang-enable-diagnostics
