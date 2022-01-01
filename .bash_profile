@@ -90,7 +90,7 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
     	export WLR_NO_HARDWARE_CURSORS=1
         export GBM_BACKEND=nvidia-drm
         export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    	exec sway --my-next-gpu-wont-be-nvidia -d
+    	exec sway --unsupported-gpu
     else
 	#Used to avoid showing a corrupted image on startup with the nouveau drivers
 	#for some reason causes sway to dump core with nvidia drivers

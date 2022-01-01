@@ -19,7 +19,7 @@ if status is-interactive
     set -xg GPG_TTY (tty)
     gpg-connect-agent updatestartuptty /bye > /dev/null
     source ~/.asdf/asdf.fish
-    zoxide init fish | source
+    zoxide init --cmd cd fish | source
 end
 
 # Aliases

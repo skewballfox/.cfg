@@ -38,7 +38,10 @@ include $HOME/.config/sway/config.d/*
 ################################# Autostart #############################################
 #########################################################################################
 
-exec systemctl --user import-environment PATH
+exec systemctl --user import-environment PATH DISPLAY WAYLAND_DISPLAY SWAYSOCK
+# to get gnome-pinentry to work properly
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec lxpolkit &
 exec gnome-keyring-daemon --start --components=secrets
 
@@ -47,6 +50,6 @@ exec mako &
 exec nm-applet --indicator &
 exec gammastep &
 exec thunar --daemon &
-exec nextcloud &
+exec syncthing &
 # exec  blueman-applet &
 # exec  aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
