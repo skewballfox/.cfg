@@ -8,3 +8,4 @@ bindsym $mod+i exec $IDE
 
 # start a terminal
 bindsym $mod+Return exec $terminal
+bindsym $mod+Shift+Return  nop kitti3
