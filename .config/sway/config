@@ -11,6 +11,7 @@ set $sway_bin ~/.config/sway/bin
 set $browser google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland
 set $terminal $sway_bin/sway-cwd-term.sh
 set $launcher wofi --gtk-dark --allow-images --allow-markup --show drun
+set $calculator $sway_bin/sway_pycalculator.sh
 #TODO
 #set $locker $sway_bin/locker.sh
 set $IDE code --enable-features=UseOzonePlatform --ozone-platform=wayland
@@ -50,7 +51,7 @@ exec mako &
 exec nm-applet --indicator &
 exec gammastep &
 exec thunar --daemon &
-exec syncthing &
-exec_always --no-startup-id kitti3 -p TL -s 1.0 0.5 
+#exec jupyter-notebook 
+exec_always --no-startup-id kitti3 -p TL -s 1.0 0.5
 # exec  blueman-applet &
 # exec  aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
