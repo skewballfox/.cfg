@@ -12,6 +12,9 @@ if [ -x "$(which npm)" ]; then
     PATH="$HOME/.local/npm_packages/lib/node_modules/bin:${PATH}"
 fi
 
+PATH="$HOME/Workspace/build/flutter/bin:${PATH}"
+
+
 #add Cargo to path
 if [[ -d "$HOME/.cargo" ]]; then
     PATH="$HOME/.cargo/bin:${PATH}"
@@ -19,6 +22,7 @@ fi
 
 #add go bin to path
 if [ -x "$(which go)" ]; then
+    export GOPATH=$HOME/.local/go
     PATH="$HOME/.local/go/bin:${PATH}"
 fi
 

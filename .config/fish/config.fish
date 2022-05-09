@@ -20,6 +20,7 @@ if status is-interactive
     gpg-connect-agent updatestartuptty /bye > /dev/null
     source ~/.asdf/asdf.fish
     zoxide init --cmd cd fish | source
+    register-python-argcomplete --shell fish portmod | source
 end
 
 # Aliases

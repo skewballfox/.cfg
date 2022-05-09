@@ -23,3 +23,9 @@ for_window [class="plasmashell" window_type="notification"] floating enable, bor
 ##################################################################################
 
 for_window [title="Connections"] floating enable;
+for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable; sticky enable
+
+# so games will stop freezing on switching workspace
+for_window [class=".*.exe"] inhibit_idle fullscreen; floating enable; border none
+for_window [class="gamescope"] inhibit_idle fullscreen; floating enable; border none
+for_window [class="steam_app.*"] inhibit_idle fullscreen; floating enable; border none
