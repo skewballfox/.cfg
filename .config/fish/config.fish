@@ -1,14 +1,4 @@
 
-# on login
-#if status --is-login
-    #set -x LD_LIBRARY_PATH /usr/lib64/openmpi
-#    set -gx EDITOR kak
-#    set -gx TERM kitty
-#    set -gx TERMCMD kitty
-    #Check if running sway and set environment variables
-    #set -qx SWAYSOCK; and set -gx QT_QPA_PLATFORM wayland; set -gx QT_QPA_PLATFORMTHEME qt5ct
-#end
-
 # per instance
 if status is-interactive
     # SSH with GPG
@@ -18,9 +8,13 @@ if status is-interactive
     end
     set -xg GPG_TTY (tty)
     gpg-connect-agent updatestartuptty /bye > /dev/null
-    source ~/.asdf/asdf.fish
-    zoxide init --cmd cd fish | source
-    register-python-argcomplete --shell fish portmod | source
+    ## Most of the stuff here, at some point, will be system dependent
+    if test -e ~/.asdf/asdf.fish
+        source ~/.asdf/asdf.fish
+    end
+    command -sq zoxide; and zoxide init --cmd cd fish | source
+    command -sq atuin; and atuin init fish | source
+    command -sq portmod; and register-python-argcomplete --shell fish portmod | source
 end
 
 # Aliases
