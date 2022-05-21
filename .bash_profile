@@ -50,6 +50,21 @@ fi
 ######################## HOST SPECIFIC VARS #####################
 #export ARGOS_HOME=/home/daedalus/Workspace/Group_Projects/Argos
 
+# thanks to https://stackoverflow.com/a/28926650/11019565
+ingroup(){ [[ " `id -Gn $2` " == *" $1 "* ]]; }
+
+sway_cmd(){
+    if ! ingroup wheel; then
+        exec sway
+    fi
+}
+
+# Auto logout of user account if inactive for 30 minutes
+if ingroup wheel; then
+    TMOUT=1800
+fi
+
+#Set variables for graphical session if one isn't running
 if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
 
     driver=$(lspci -nnk | grep 0300 -A3 | grep -oP "(?<=driver in use: ).*")
@@ -91,14 +106,14 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
 
     #Stuff related to running sway with Nvidia
     if [[ $driver == "nvidia" ]]; then
-    	export WLR_NO_HARDWARE_CURSORS=1
+    	  export WLR_NO_HARDWARE_CURSORS=1
         export GBM_BACKEND=nvidia-drm
         export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    	exec sway --unsupported-gpu
+    	  [ ! "$(ingroup wheel)" ] && exec sway --unsupported-gpu
     else
-	#Used to avoid showing a corrupted image on startup with the nouveau drivers
-	#for some reason causes sway to dump core with nvidia drivers
-	export WLR_DRM_NO_MODIFIERS=1
-        exec sway
+	      # Used to avoid showing a corrupted image on startup with the nouveau drivers
+	      # for some reason causes sway to dump core with nvidia drivers
+	      export WLR_DRM_NO_MODIFIERS=1
+        [ ! "$(ingroup wheel)" ] && exec sway
     fi
 fi
