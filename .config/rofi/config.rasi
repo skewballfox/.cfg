@@ -1,6 +1,5 @@
 configuration {
     modi: "drun";
-    theme: "Monokai";
     show-icons: true;
     lines: 7;
     eh: 2;
@@ -9,3 +8,5 @@ configuration {
     fullscreen: true;
     font: "Fira Code 12";
 }
+
+@theme "Monokai"

@@ -40,7 +40,7 @@ export TERMCMD=kitty
 export EDITOR=kak
 
 # set path to libraries
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64"
 
 if [ -x "$(which java)" ]; then
     # Set JDK installation directory according to selected Java compiler
@@ -66,6 +66,8 @@ fi
 
 #Set variables for graphical session if one isn't running
 if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
+
+    pactl load-module module-echo-cancel
 
     driver=$(lspci -nnk | grep 0300 -A3 | grep -oP "(?<=driver in use: ).*")
 
