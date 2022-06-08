@@ -86,7 +86,6 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
     export MOZ_WEBRENDER=1
 
     export _JAVA_AWT_WM_NONREPARENTING=1
-    #export WLR_DRM_NO_MODIFIERS=1
 
     #necessary for tumbler apparently
     export XDG_CACHE_HOME=$HOME/.cache
@@ -102,20 +101,23 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
         systemctl --user import-environment XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE
     fi
 
+    #I think this is necessary if using dbus-run-session
+    #dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+
     #export $(gnome-keyring-daemon --start --components=secrets)
     #apparently pkcs11 support is deprecated
     # https://fedoraproject.org/wiki/Changes/ModularGnomeKeyring
 
     #Stuff related to running sway with Nvidia
     if [[ $driver == "nvidia" ]]; then
-    	  export WLR_NO_HARDWARE_CURSORS=1
+        export WLR_NO_HARDWARE_CURSORS=1
         export GBM_BACKEND=nvidia-drm
         export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    	  [ ! "$(ingroup wheel)" ] && exec sway --unsupported-gpu
+    	ingroup wheel || exec sway --unsupported-gpu
     else
-	      # Used to avoid showing a corrupted image on startup with the nouveau drivers
-	      # for some reason causes sway to dump core with nvidia drivers
-	      export WLR_DRM_NO_MODIFIERS=1
-        [ ! "$(ingroup wheel)" ] && exec sway
+	    # Used to avoid showing a corrupted image on startup with the nouveau drivers
+	    # for some reason causes sway to dump core with nvidia drivers
+	    export WLR_DRM_NO_MODIFIERS=1
+        ingroup wheel || exec sway
     fi
 fi

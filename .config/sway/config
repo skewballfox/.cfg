@@ -10,7 +10,7 @@ floating_modifier $mod
 set $sway_bin ~/.config/sway/bin
 set $browser google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland
 set $terminal $sway_bin/sway-cwd-term.sh
-set $launcher wofi --gtk-dark --allow-images --allow-markup --show drun
+set $launcher rofi -show drun
 set $calculator $sway_bin/sway_pycalculator.sh
 #TODO
 #set $locker $sway_bin/locker.sh
@@ -42,7 +42,7 @@ include $HOME/.config/sway/config.d/*
 exec systemctl --user import-environment PATH DISPLAY WAYLAND_DISPLAY SWAYSOCK
 # to get gnome-pinentry to work properly
 exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+     dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY WAYLAND_DISPLAY SWAYSOCK XAUTHORITY
 exec lxpolkit &
 exec gnome-keyring-daemon --start --components=secrets
 

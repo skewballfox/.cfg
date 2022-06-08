@@ -3,8 +3,9 @@ configuration {
     show-icons: true;
     lines: 7;
     eh: 2;
+    markup: true;
     icon-theme: "Flatery-Dark";
-    fake-transparency: true;
+    opacity: 8;
     fullscreen: true;
     font: "Fira Code 12";
 }
