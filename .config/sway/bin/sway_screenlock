@@ -1,8 +1,5 @@
 #!/usr/bin/dash
 
-base_name="/tmp/swaylockscreen"
-image_ext=".jpeg"
-
 dir="$(mktemp -d)"
 trap '{ rm -r "${dir?}"; return $?; }' INT EXIT
 
