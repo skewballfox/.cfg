@@ -1,0 +1,26 @@
+#!/usr/bin/dash
+
+base_name="/tmp/swaylockscreen"
+image_ext=".jpeg"
+
+dir="$(mktemp -d)"
+trap '{ rm -r "${dir?}"; return $?; }' INT EXIT
+
+swaymsg -t get_outputs | jq -r '.[]|select(.active).name' | {
+	while read -r output; do
+		# ppm is a bitmapped format supported by grim, convert, and swaylock
+		img="$dir/$output.ppm"
+		(
+			grim -o "$output" -t ppm - | ffmpeg  -i pipe: -filter_complex boxblur=lr=20:lp=2 -y "$img"
+            convert "$img" -gravity center ~/.config/sway/rocinante_by_imajinn_design_dbwhmwb-fullview.png -composite "$img"
+		) &
+		lock_args="--image=$output:$img $lock_args"
+	done
+	wait
+
+	set -f # suppress globbing
+	#shellcheck disable=2086
+	swaylock $lock_args
+}
+
+ 

@@ -1,11 +1,4 @@
-set $lock swaylock \
-    --screenshots \
-    --effect-scale 0.5\
-    --effect-blur 7x5 \
-    --effect-scale 2 \
-    --grace 2\
-    --effect-compose \
-    "center;$HOME/.config/sway/rocinante_by_imajinn_design_dbwhmwb-fullview.png"
+
 
 bindsym $mod+Shift+l exec $lock
 

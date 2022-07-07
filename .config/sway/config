@@ -10,6 +10,7 @@ floating_modifier $mod
 set $sway_bin ~/.config/sway/bin
 set $browser google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland
 set $terminal $sway_bin/sway-cwd-term.sh
+set $lock $sway_bin/sway_screenlock
 set $launcher rofi -show drun
 set $calculator $sway_bin/sway_pycalculator.sh
 #TODO
