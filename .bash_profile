@@ -26,6 +26,12 @@ if [ -x "$(which go)" ]; then
     PATH="$HOME/.local/go/bin:${PATH}"
 fi
 
+if [[ -d "$HOME/.local/Android" ]]; then
+    export ANDROID_HOME="$HOME/.local/Android"
+    export ANDROID_SDK_ROOT="$ANDROID_HOME"
+    PATH="$ANDROID_HOME/bin:${PATH}"
+fi
+
 #add .local bin
 PATH="$HOME/.local/bin:${PATH}"
 
@@ -67,7 +73,7 @@ fi
 #Set variables for graphical session if one isn't running
 if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
 
-    pactl load-module module-echo-cancel
+    # pactl load-module module-echo-cancel
 
     driver=$(lspci -nnk | grep 0300 -A3 | grep -oP "(?<=driver in use: ).*")
 
