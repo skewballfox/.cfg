@@ -1,4 +1,19 @@
+# Note: eDP-1 is the primary display on most(probably all) laptops
+# HDMI-A-1 is the first port on the gpu of my desktop, but may be a second monitor for a laptop, thus eDP-1 should come first.
 
+# source: https://www.reddit.com/r/swaywm/comments/x3lsc6/comment/imq9sfu
+# assign workspaces to outputs
+workspace $ws1 output eDP-1,HDMI-A-1
+workspace $ws2 output eDP-1,HDMI-A-1
+workspace $ws3 output eDP-1,HDMI-A-1
+workspace $ws4 output eDP-1,HDMI-A-1
+workspace $ws5 output eDP-1,HDMI-A-1
+workspace $ws6 output eDP-1,HDMI-A-1, DP-1
+workspace $ws7 output eDP-1,HDMI-A-1, DP-1
+workspace $ws8 output eDP-1,HDMI-A-1, DP-1
+workspace $ws9 output eDP-1,HDMI-A-1, DP-1
+workspace $ws10 output eDP-1,HDMI-A-1, DP-1
+ 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2

@@ -35,6 +35,10 @@ fi
 #add .local bin
 PATH="$HOME/.local/bin:${PATH}"
 
+if [ -d "$HOME/.pub-cache" ]; then
+    export PATH="$PATH":"$HOME/.pub-cache/bin"
+fi
+
 #Export the modified path
 export PATH
 

@@ -1,2 +1,9 @@
+
+#save all desktops to file
 bindsym Print exec "grim  $HOME/Media/Images/Screenshots/$(hostname)-$(date +%d-%m-%Y_%H-%M-%S).png"
+
+#copy region to clipboard
 bindsym $mod+Print exec "slurp| grim -g - - | wl-copy"
+
+#save region to file
+bindsym $mod+Shift+Print exec "slurp | grim $HOME/Media/Images/Screenshots/$(hostname)-$(date +%d-%m-%Y_%H-%M-%S).png -g -"
