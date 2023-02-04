@@ -36,7 +36,12 @@ fi
 PATH="$HOME/.local/bin:${PATH}"
 
 if [ -d "$HOME/.pub-cache" ]; then
-    export PATH="$PATH":"$HOME/.pub-cache/bin"
+    PATH="$PATH":"$HOME/.pub-cache/bin"
+fi
+
+#stuff for fluvio
+if [ -d "$HOME/.fluvio" ]; then
+     PATH="$PATH":"$HOME/.fluvio/bin"
 fi
 
 #Export the modified path
@@ -49,13 +54,23 @@ export TERMCMD=kitty
 #set default editor
 export EDITOR=kak
 
+#set the directory for taskwarrior-server
+export TASKDDATA=/var/lib/taskd
+
 # set path to libraries
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64:$HOME/.local/lib"
 
 if [ -x "$(which java)" ]; then
     # Set JDK installation directory according to selected Java compiler
     export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")
 fi
+
+#Playing around with wasmedge runtime
+#https://wasmedge.org/book/en/write_wasm/rust/wasinn.html#get-wasmedge-with-wasi-nn-plug-in-tensorflow-lite-backend
+if [ -d "$HOME/.wasmedge" ]; then
+    . "$HOME/.wasmedge/env"
+fi
+
 
 ######################## HOST SPECIFIC VARS #####################
 #export ARGOS_HOME=/home/daedalus/Workspace/Group_Projects/Argos
@@ -95,6 +110,8 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
     #think it's used for obs studio
     export MOZ_WEBRENDER=1
 
+    # for IntelliJ, Android Studio, etc
+    # https://stackoverflow.com/questions/33424736/intellij-idea-14-on-arch-linux-opening-to-grey-screen/34419927#34419927
     export _JAVA_AWT_WM_NONREPARENTING=1
 
     #necessary for tumbler apparently
@@ -131,3 +148,5 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
         ingroup wheel || exec sway
     fi
 fi
+
+. "/home/skewballfox/.wasmedge/env"

@@ -47,3 +47,5 @@ eval "$(starship init bash)"
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
+
+. "/home/skewballfox/.wasmedge/env"

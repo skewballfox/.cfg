@@ -8,7 +8,7 @@ set $mod Mod4
 floating_modifier $mod
 
 set $sway_bin ~/.config/sway/bin
-set $browser google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland
+set $browser firefox
 set $terminal $sway_bin/sway-cwd-term.sh
 set $lock $sway_bin/sway_screenlock
 set $launcher rofi -show drun
@@ -53,6 +53,6 @@ exec nm-applet --indicator &
 exec gammastep &
 exec thunar --daemon &
 #exec jupyter-notebook 
-exec_always --no-startup-id kitti3 -p TL -s 1.0 0.5
-# exec  blueman-applet &
+#exec_always --no-startup-id kitti3 -p TL -s 1.0 0.5
+#exec  blueman-applet &
 # exec  aa-notify -p -s 1 -w 60 -f /var/log/audit/audit.log &
