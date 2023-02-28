@@ -69,6 +69,11 @@ fi
 #https://wasmedge.org/book/en/write_wasm/rust/wasinn.html#get-wasmedge-with-wasi-nn-plug-in-tensorflow-lite-backend
 if [ -d "$HOME/.wasmedge" ]; then
     . "$HOME/.wasmedge/env"
+    # https://docs.rs/crate/wasmedge-sys/latest#Build
+    export WASMEDGE_INCLUDE_DIR=$HOME/wasmedge-install/include 
+    export WASMEDGE_LIB_DIR=$HOME/wasmedge-install/lib
+    export WASMEDGE_PLUGIN_PATH=$HOME/.wasmedge/lib/wasmedge
+    
 fi
 
 
