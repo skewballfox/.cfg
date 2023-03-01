@@ -1,24 +1,23 @@
+[theme]
 theme = "bad-wolf"
-icons = "awesome"
+
+[icons]
+icons = "awesome6"
 
 [[block]]
 block = "net"
 device="wlp2s0"
-ip=true
 
 [[block]]
 block = "temperature"
-collapsed = false
+format_alt = " $icon "
 interval = 10
 
-[[block]]
-block = "load"
-interval = 1
-format = "{1m}"
 
 [[block]]
-device="BAT1"
 block = "battery"
-#hide_missing=true
+driver="sysfs"
+device="BAT1"
+missing_format=""
 interval = 10
 format = "{percentage}% {time}"
