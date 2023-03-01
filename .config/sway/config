@@ -41,6 +41,10 @@ include $HOME/.config/sway/config.d/*
 #########################################################################################
 
 exec systemctl --user import-environment PATH DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+# https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
 # to get gnome-pinentry to work properly
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY WAYLAND_DISPLAY SWAYSOCK XAUTHORITY
@@ -48,7 +52,14 @@ exec lxpolkit &
 exec gnome-keyring-daemon --start --components=secrets
 
 output "*" bg $(find $HOME/Media/Images/wallpapers/. -type f | shuf -n1) fill
+
+#WIP stuff that may get deleted, trying to scaling for xapps
+#xwayland scale 2
+exec xsettingsd
+#exec kanshi
+
 exec mako &
+
 exec nm-applet --indicator &
 exec gammastep &
 exec thunar --daemon &
