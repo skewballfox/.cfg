@@ -1,3 +1,4 @@
+# vim:ft=i3:
 # Note: eDP-1 is the primary display on most(probably all) laptops
 # HDMI-A-1 is the first port on the gpu of my desktop, but may be a second monitor for a laptop, thus eDP-1 should come first.
 

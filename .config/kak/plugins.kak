@@ -1,6 +1,10 @@
 #for language server features
 source "/usr/share/kak-lsp/rc/lsp.kak"
 #eval %sh{kak-lsp --kakoune -s $kak_session}
+evaluate-commands %sh{
+    cork init
+    #kak-lsp --kakoune -s $kak_session
+}
 
 # uncomment to enable debugging
 #eval %sh{echo ${kak_opt_lsp_cmd} >> /tmp/kak-lsp.log}
@@ -46,7 +50,7 @@ evaluate-commands %sh{
             git clone -q https://github.com/andreyorst/plug.kak "$plugins/plug.kak"
     printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
 }
-plug "andreyorst/plug.kak" noload
+
 
 evaluate-commands %sh{
 
@@ -59,17 +63,19 @@ evaluate-commands %sh{
     fi
     kcr init kakoune
 }
-plug "alexherbo2/auto-pairs.kak" config %{
+
+# https://github.com/alexherbo2/auto-pairs.kak
+cork autopairs "https://github.com/alexherbo2/auto-pairs.kak"  %{
     hook global WinSetOption filetype=markdown %{
         set-option -add buffer auto_pairs_surround $$$ $$$ $ $ _ _ * *
     }
 }
 
-plug "alexherbo2/surround.kak"
+cork surround "alexherbo2/surround.kak"
 
-#plug "aparkerdavid/kakoune-rainbow"
 
-plug "andreyorst/kaktree" config %{
+# https://github.com/andreyorst/kaktree
+cork kaktree "https://github.com/andreyorst/kaktree" %{
     hook global WinSetOption filetype=kaktree %{
         remove-highlighter buffer/numbers
         remove-highlighter buffer/matching
@@ -79,10 +85,32 @@ plug "andreyorst/kaktree" config %{
     kaktree-enable
 }
 
-#plug "occivink/kakoune-gdb"
+# https://github.com/occivink/kakoune-gdb
+cork kakoune-gdb "https://github.com/occivink/kakoune-gdb" %{
+    declare-user-mode gdb
+    map global user d ":enter-user-mode -lock gdb<ret>" -docstring "gdb"
+    map global gdb n ":gdb-next<ret>" -docstring "step over (next)"
+    map global gdb s ":gdb-step<ret>" -docstring "step in (step)"
+    map global gdb f ":gdb-print<ret>" -docstring "step out (finish)"
+    map global gdb r ":gdb-start<ret>" -docstring "start"
+    map global gdb R ":gdb-run<ret>" -docstring "run"
+    map global gdb c ":gdb-continue<ret>" -docstring "continue"
+    map global gdb g ":gdb-jump<ret>" -docstring "jump"
+    map global gdb G ":gdb-toggle-autojump<ret>" -docstring "toggle autojump"
+    map global gdb t ":gdb-toggle-breakpoint<ret>" -docstring "toggle breakpoint"
+    map global gdb T ":gdb-backtrace<ret>" -docstring "backtrace"
+    map global gdb p ":gdb-print<ret>" -docstring "print"
+    map global gdb Q ":gdb-session-new<ret>" -docstring "new"
+    map global gdb q ":gdb-session-stop<ret>" -docstring "stop"
+}
+
+cork pmanage.kak "https://github.com/andreyorst/pmanage.kak"
+
+cork smarttab.kak "https://github.com/andreyorst/smarttab.kak"
 
 #for clipboard integration
-plug "lePerdu/kakboard" %{
+# https://github.com/lePerdu/kakboard
+cork kakboard "https://github.com/lePerdu/kakboard" %{
         hook global WinCreate .* %{ kakboard-enable }
 }
 
@@ -90,12 +118,8 @@ plug "lePerdu/kakboard" %{
 
 
 #JAVA 15 SUPPORT!
-plug "KJ_DUNCAN/kakoune-java.kak" domain "bitbucket.org"
+cork java-kak "KJ_DUNCAN/kakoune-java.kak" domain "bitbucket.org"
 
-#plug "alexherbo2/snippets.kak" %{
-    # Modules
-#    require-module snippets-crystal
+# TODO: add more stuff from 
+# https://git.sr.ht/~raiguard/dotfiles/tree/master/item/.config/kak/kakrc
 
-    # Options
-#    set-option global snippets_scope global
-#}

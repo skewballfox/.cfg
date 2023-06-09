@@ -1,8 +1,6 @@
-
+# vim:ft=i3:
 font pango:Droid Sans Mono 8; FontAwesom 12
 
-# disable windows titlebars, while preserving border
-for_window [class=".*"] border pixel 8
 
 # default border pixel size
 default_border pixel 3

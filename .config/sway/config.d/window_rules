@@ -1,3 +1,4 @@
+# vim:ft=i3:
 ################################### KDE WINDOW BEHAVIOR ################################
 ########################################################################################
 exec  wmctrl -c Plasma
@@ -29,3 +30,5 @@ for_window [title="(?:Open|Save) (?:File|Folder|As)"] floating enable; sticky en
 for_window [class=".*.exe"] inhibit_idle fullscreen; floating enable; border none
 for_window [class="gamescope"] inhibit_idle fullscreen; floating enable; border none
 for_window [class="steam_app.*"] inhibit_idle fullscreen; floating enable; border none
+
+for_window [app_id="google-chrome"] focus_on_window_activation focus

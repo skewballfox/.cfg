@@ -1,6 +1,6 @@
 ################### Universal Vars ########################
 #include local desktop files in data dir
-export XDG_DATA_DIRS="$HOME/.local/share/applications:${XDG_DATA_DIRS}"
+export XDG_DATA_HOME="$HOME/.local/share"
 if [ -x "$(which npm)" ]; then
     #set location for npm packages
     export NPM_PACKAGES="$HOME/.local/npm_packages"
@@ -44,6 +44,11 @@ if [ -d "$HOME/.fluvio" ]; then
      PATH="$PATH":"$HOME/.fluvio/bin"
 fi
 
+#handling android tools via android studio
+if [ -d "$HOME/Android/Sdk/platform-tools" ]; then
+    PATH="$PATH":"$HOME/Android/Sdk/platform-tools/"
+fi
+
 #Export the modified path
 export PATH
 
@@ -85,7 +90,7 @@ ingroup(){ [[ " `id -Gn $2` " == *" $1 "* ]]; }
 
 sway_cmd(){
     if ! ingroup wheel; then
-        exec sway
+        exec dbus-run-session sway
     fi
 }
 
@@ -103,9 +108,11 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
 
     export QT_QPA_PLATFORM=wayland
     export QT_QPA_PLATFORMTHEME=qt5ct
-
+    
     #export QT_AUTO_SCREEN_SCALE_FACTOR=1
     export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+    export GDK_BACKEND=wayland
 
     #NOTE: Simple DirectMedia Layer
     export SDL_VIDEODRIVER=wayland
@@ -129,9 +136,16 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
     export XDG_SESSION_TYPE=wayland
     export CURRENT_DESKTOP=sway
 
+    # Vukan rendering for wlroots
+    # NOTE: requires vulkan-validation-layers
+    # https://wiki.archlinux.org/title/sway#Use_another_wlroots_renderersw
+    export WLR_RENDERER=vulkan
+
     if command -v systemctl >/dev/null 2>&1; then
         systemctl --user import-environment XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE
     fi
+
+    # for Tauri/WINIT apps to use wayland
 
     #I think this is necessary if using dbus-run-session
     #dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
@@ -145,12 +159,12 @@ if [ -z $DISPLAY ] && [[ "$(tty)" =~ /dev/tty[0-9] ]]; then
         export WLR_NO_HARDWARE_CURSORS=1
         export GBM_BACKEND=nvidia-drm
         export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    	ingroup wheel || exec sway --unsupported-gpu
+    	ingroup wheel || exec sway-git --unsupported-gpu -D noscanout
     else
 	    # Used to avoid showing a corrupted image on startup with the nouveau drivers
 	    # for some reason causes sway to dump core with nvidia drivers
 	    export WLR_DRM_NO_MODIFIERS=1
-        ingroup wheel || exec sway
+        ingroup wheel || exec dbus-run-session sway-git
     fi
 fi
 

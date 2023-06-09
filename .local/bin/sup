@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# update flatpak user packages
+if command -v flatpak
+then
+    flatpak --user update -y
+fi
+# update rust
+if command -v rustup
+then
+    rustup update
+fi
+
+# update packages installed via cargo
+if command -v cargo install-update
+then
+    cargo install-update -a
+fi
+
+# update pipx packages
+if command -v pipx
+then
+    pipx upgrade-all
+fi
+
+# update pip packages
+pip install --user "$(pip list --user --outdated | tail -n +3 | awk '{ print $1 }' )" --upgrade
+
+# npm update -g
+if command -v npm
+then
+    npm update -g
+fi
+
+#update go packages
+# if command -q go
+#then
+    # go install
+    # fi
+
+# update kakoune plugins
+if command -v kak
+then
+    if command -v cork
+    then
+        cork update
+    else 
+        kak -e plug-update
+    fi
+fi

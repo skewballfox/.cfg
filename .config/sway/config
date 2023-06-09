@@ -8,7 +8,7 @@ set $mod Mod4
 floating_modifier $mod
 
 set $sway_bin ~/.config/sway/bin
-set $browser firefox
+set $browser google-chrome --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WebRTCPipeWireCapturer
 set $terminal $sway_bin/sway-cwd-term.sh
 set $lock $sway_bin/sway_screenlock
 set $launcher rofi -show drun
@@ -43,7 +43,7 @@ include $HOME/.config/sway/config.d/*
 exec systemctl --user import-environment PATH DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 # https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XAUTHORITY
 
 # to get gnome-pinentry to work properly
 exec hash dbus-update-activation-environment 2>/dev/null && \
@@ -63,6 +63,8 @@ exec mako &
 exec nm-applet --indicator &
 exec gammastep &
 exec thunar --daemon &
+exec aw-server &
+exec "sleep 5; aw-watcher-window-wayland &"
 #exec jupyter-notebook 
 #exec_always --no-startup-id kitti3 -p TL -s 1.0 0.5
 #exec  blueman-applet &

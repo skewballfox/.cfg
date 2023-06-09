@@ -1,3 +1,4 @@
+# vim:ft=i3:
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec light -A 5   # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness

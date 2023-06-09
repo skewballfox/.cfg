@@ -14,6 +14,12 @@ if status is-interactive
     end
     command -sq zoxide; and zoxide init --cmd cd fish | source
     command -sq atuin; and atuin init fish | source
+    #if type -q atuin
+    #    set -gx ATUIN_NOBIND "true"
+    #    atuin init fish | source
+    #    bind \e\[A  _atuin_search_widget
+    #    bind \e[1;2A  __atuin_history
+    #end
     command -sq portmod; and register-python-argcomplete --shell fish portmod | source
 end
 

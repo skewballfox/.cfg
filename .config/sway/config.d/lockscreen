@@ -1,4 +1,4 @@
-
+# vim:ft=i3:
 
 bindsym $mod+Shift+l exec $lock
 

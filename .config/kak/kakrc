@@ -31,6 +31,10 @@ hook global InsertChar \t %{ exec -draft -itersel h@ }
 map global normal '#' :comment-line<ret> -docstring 'comment line'
 map global normal '<a-#>' :comment-block<ret> -docstring 'comment block'
 
+hook global BufOpenFile .* %{
+    modeline-parse
+}
+
 
 ####################### Autocompletion ##########################
 #################################################################

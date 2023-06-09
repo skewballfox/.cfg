@@ -1,3 +1,4 @@
+# vim:ft=i3:
 # start wofi (a program launcher)
 bindsym $mod+d exec $launcher
 

@@ -1,2 +1,5 @@
 background-color=#1F262A
 text-color=#00FFFF
+
+[app-name=Thunderbird]
+default-timeout=5000
