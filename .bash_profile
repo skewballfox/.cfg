@@ -12,8 +12,9 @@ if [ -x "$(which npm)" ]; then
     PATH="$HOME/.local/npm_packages/lib/node_modules/bin:${PATH}"
 fi
 
-PATH="$HOME/Workspace/build/flutter/bin:${PATH}"
-
+if [[ -d "$HOME/Workspace/build/flutter/bin" ]]; then
+    PATH="$HOME/Workspace/build/flutter/bin:${PATH}"
+fi
 
 #add Cargo to path
 if [[ -d "$HOME/.cargo" ]]; then
@@ -47,6 +48,10 @@ fi
 #handling android tools via android studio
 if [ -d "$HOME/Android/Sdk/platform-tools" ]; then
     PATH="$PATH":"$HOME/Android/Sdk/platform-tools/"
+fi
+
+if [[ -x "$(which kani)" ]]; then
+    export KANI_HOME="$HOME/.local/kani"
 fi
 
 #Export the modified path
