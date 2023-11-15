@@ -86,12 +86,22 @@ if [ -d "$HOME/.wasmedge" ]; then
     
 fi
 
+# check if running docker rootless, if so set docker host
+if [ -f "$HOME/.config/systemd/user/docker.service" ]; then
+    USER_ID=$(id -u)
+    export DOCKER_HOST=unix:///run/user/$USER_ID/docker.sock
+fi
 
 ######################## HOST SPECIFIC VARS #####################
 #export ARGOS_HOME=/home/daedalus/Workspace/Group_Projects/Argos
 
 # thanks to https://stackoverflow.com/a/28926650/11019565
 ingroup(){ [[ " `id -Gn $2` " == *" $1 "* ]]; }
+
+if ! ingroup wheel; then
+    CMAKE_PREFIX_PATH=$HOME/.local
+    CMAKE_INSTALL_PREFIX=$HOME/.local
+fi
 
 sway_cmd(){
     if ! ingroup wheel; then

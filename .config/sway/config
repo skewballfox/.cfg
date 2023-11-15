@@ -57,6 +57,7 @@ output "*" bg $(find $HOME/Media/Images/wallpapers/. -type f | shuf -n1) fill
 #xwayland scale 2
 exec xsettingsd
 #exec kanshi
+exec shikane -c ~/.config/shikane/config.toml
 
 exec mako &
 

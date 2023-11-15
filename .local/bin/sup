@@ -24,7 +24,11 @@ then
 fi
 
 # update pip packages
-pip install --user "$(pip list --user --outdated | tail -n +3 | awk '{ print $1 }' )" --upgrade
+user_pips=pip list --user --outdated | tail -n +3 | awk '{ print $1 }'
+if ! [ -z "$user_pips" ]
+then
+    pip install --user "$user_pips" --upgrade
+fi
 
 # npm update -g
 if command -v npm
