@@ -29,9 +29,9 @@ export GPG_TTY="$(tty)"
 gpg-connect-agent updatestartuptty /bye > /dev/null
 
 # enable asdf
-. $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/asdf.sh
 # enable asdf completions
-. $HOME/.asdf/completions/asdf.bash
+# . $HOME/.asdf/completions/asdf.bash
 
 #################### ALIASES #########################
 alias dfconfig="git --git-dir=$HOME/.config/git/cfg/ --work-tree=$HOME"

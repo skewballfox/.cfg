@@ -5,6 +5,7 @@ if command -v flatpak
 then
     flatpak --user update -y
 fi
+
 # update rust
 if command -v rustup
 then
@@ -24,7 +25,7 @@ then
 fi
 
 # update pip packages
-user_pips=pip list --user --outdated | tail -n +3 | awk '{ print $1 }'
+user_pips=$(pip list --user --outdated | tail -n +3 | awk '{ print $1 }')
 if ! [ -z "$user_pips" ]
 then
     pip install --user "$user_pips" --upgrade
