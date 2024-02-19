@@ -34,7 +34,7 @@ if [[ -d "$HOME/.local/Android" ]]; then
 fi
 
 if [ -x "$(which cs)" ]; then
-    export PATH="$PATH:/home/Daedalus/.local/share/coursier/bin"
+    export PATH="$PATH:$HOME/.local/share/coursier/bin"
 fi
 
 #add .local bin
