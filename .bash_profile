@@ -1,7 +1,7 @@
 ################### Universal Vars ########################
 #include local desktop files in data dir
 export XDG_DATA_HOME="$HOME/.local/share"
-if [ -x "$(which npm)" ]; then
+if [ -x "$(command -v npm)" ]; then
     #set location for npm packages
     export NPM_PACKAGES="$HOME/.local/npm_packages"
     #update MANPATH
@@ -22,7 +22,7 @@ if [[ -d "$HOME/.cargo" ]]; then
 fi
 
 #add go bin to path
-if [ -x "$(which go)" ]; then
+if [ -x "$(command -v go)" ]; then
     export GOPATH=$HOME/.local/go
     PATH="$HOME/.local/go/bin:${PATH}"
 fi
@@ -33,7 +33,7 @@ if [[ -d "$HOME/.local/Android" ]]; then
     PATH="$ANDROID_HOME/bin:${PATH}"
 fi
 
-if [ -x "$(which cs)" ]; then
+if [ -x "$(command -v cs)" ]; then
     export PATH="$PATH:$HOME/.local/share/coursier/bin"
 fi
 
@@ -54,7 +54,7 @@ if [ -d "$HOME/Android/Sdk/platform-tools" ]; then
     PATH="$PATH":"$HOME/Android/Sdk/platform-tools/"
 fi
 
-if [[ -x "$(which kani)" ]]; then
+if [[ -x "$(command -v kani)" ]]; then
     export KANI_HOME="$HOME/.local/kani"
 fi
 
@@ -74,7 +74,7 @@ export TASKDDATA=/var/lib/taskd
 # set path to libraries
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64:$HOME/.local/lib"
 
-if [ -x "$(which java)" ]; then
+if [ -x "$(command -v java)" ]; then
     # Set JDK installation directory according to selected Java compiler
     export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:/bin/java::")
 fi
